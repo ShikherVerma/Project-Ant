@@ -15,7 +15,7 @@ import com.romainpiel.titanic.library.TitanicTextView;
 public class SplashActivity extends Activity
 {
   private static String TAG = SplashActivity.class.getName();
-  private static long SLEEP_TIME = 9;	// Sleep for some time
+  private static long SLEEP_TIME = 9;  // Sleep for some time
   private KenBurnsView mImg;
 
   @Override
@@ -43,17 +43,21 @@ public class SplashActivity extends Activity
 
   }
 
-  private class IntentLauncher extends Thread {
+  private class IntentLauncher extends Thread
+  {
 
     @Override
     /**
      * Sleep for some time and than start new activity.
      */
-    public void run() {
-      try {
+    public void run()
+    {
+      try
+      {
         // Sleeping
-        Thread.sleep(SLEEP_TIME*1000);
-      } catch (Exception e) {
+        Thread.sleep(SLEEP_TIME * 1000);
+      } catch (Exception e)
+      {
         Log.e(TAG, e.getMessage());
       }
 

@@ -11,23 +11,23 @@
     android:src="@drawable/bheed"/>
 
   <LinearLayout
-    android:orientation="horizontal"
     android:id="@+id/hidden"
-    android:background="@drawable/fadetored"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fadetored"
+    android:orientation="horizontal">
   </LinearLayout>
 
   <com.romainpiel.titanic.library.TitanicTextView
     android:id="@+id/my_text_view"
-    android:text=" Antaragni "
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:text=" Antaragni "
     android:textAlignment="center"
     android:textColor="#ffd750"
-    android:textSize="70sp"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"/>
+    android:textSize="70sp"/>
 
 </RelativeLayout>
