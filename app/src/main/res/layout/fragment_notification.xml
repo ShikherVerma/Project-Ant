@@ -4,10 +4,9 @@
              android:layout_height="match_parent"
              tools:context="in.antaragni.antaragni.fragments.NotificationFragment">
 
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/sample_recycler_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="Notification"/>
+    android:layout_height="match_parent"/>
 
 </FrameLayout>
