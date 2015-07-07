@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:id="@+id/main_screen"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -13,26 +14,16 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-  <!-- the layout which will contain (host) the drawerLayout -->
   <FrameLayout
     android:id="@+id/drawer_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_below="@id/toolbar">
 
-    <!-- the layout which will be the content of the activity (which will be hosted inside the drawer (NOT the list of the drawer)) -->
     <FrameLayout
-      android:id="@+id/frame_container"
+      android:id="@+id/fragment_container"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
-
-      <TextView
-        android:id="@+id/txtLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Test"
-        android:textSize="16sp"/>
-    </FrameLayout>
+      android:layout_height="match_parent"/>
   </FrameLayout>
+
 </RelativeLayout>

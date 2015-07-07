@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  card_view:cardCornerRadius="5dp"
+  card_view:cardElevation="2dp"
+  card_view:cardUseCompatPadding="true">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/card_padding" >
+      <!-- The actual quiz question. -->
+      <TextView
+        android:id="@+id/paradox_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_margin_padding"
+        android:textSize="@dimen/quiz_question_text_size"
+        tools:text="Why did the chicken cross the mo..something strip ?"/>
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/md_blue_300"
+      android:padding="@dimen/card_padding">
+      <!-- Bottom panel with fake share buttons. -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:singleLine="true"
+          android:text="Yes"
+          android:textSize="16sp"/>
+
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:singleLine="true"
+          android:text="No"
+          android:textSize="16sp"/>
+
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:singleLine="true"
+          android:text="Give up"
+          android:textSize="16sp"/>
+      </LinearLayout>
+    </LinearLayout>
+
+  </LinearLayout>
+</android.support.v7.widget.CardView>
