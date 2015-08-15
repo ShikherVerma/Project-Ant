@@ -1,15 +1,29 @@
 <resources>
 
-  <style name="AppTheme" parent="@style/MaterialDrawerTheme.Light.DarkToolbar"><!-- ...and here we setting appcompat’s color theme attrs-->
-    <item name="colorPrimary">#F1433C</item>
-    <item name="colorPrimaryDark">#D03033</item>
+  <style name="AppTheme" parent="@style/MaterialDrawerTheme"><!-- ...and here we setting appcompat’s color theme attrs-->
+    <item name="colorPrimary">#212121</item>
+    <item name="colorPrimaryDark">#212121</item>
     <item name="colorAccent">#02A8F3</item>
     <!-- MaterialDrawer specific values -->
-    <item name="material_drawer_selected_text">#EF5350</item>
+    <item name="material_drawer_selected_text">@color/md_yellow_400</item>
     <item name="material_drawer_header_selection_text">
       @color/material_drawer_dark_primary_text
     </item>
-    <!-- CAB :D -->
+
     <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <!-- style for the tabs -->
+  <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+    <item name="tabIndicatorColor">@color/md_yellow_400</item>
+    <item name="tabPaddingStart">12dp</item>
+    <item name="tabPaddingEnd">12dp</item>
+    <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+  </style>
+
+  <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/md_white_1000</item>
+    <item name="textAllCaps">true</item>
   </style>
 </resources>
