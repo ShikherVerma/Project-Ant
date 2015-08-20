@@ -1,5 +1,6 @@
 package in.antaragni.antaragni;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -19,26 +20,19 @@ import com.mikepenz.materialdrawer.util.KeyboardUtil;
 import in.antaragni.antaragni.fragments.ContactFragment;
 import in.antaragni.antaragni.fragments.EventFragment;
 import in.antaragni.antaragni.fragments.FoodFragment;
-import in.antaragni.antaragni.fragments.InformalFragment;
-import in.antaragni.antaragni.fragments.MapFragment;
-import in.antaragni.antaragni.fragments.NotificationFragment;
-import in.antaragni.antaragni.fragments.ResultFragment;
 import in.antaragni.antaragni.fragments.ScheduleFragment;
 
 public class MainActivity extends AppCompatActivity
 {
-
-  protected int HOME = 1;
-  protected int SCHEDULE = 2;
-  protected int EVENTS = 3;
-  protected int MAP = 4;
-  protected int FOOD = 5;
-  protected int INFORMAL = 6;
-  protected int RESULT = 7;
-  protected int CONTACT = 8;
+  protected int SCHEDULE = 1;
+  protected int EVENTS = 2;
+  protected int MAP = 3;
+  protected int FOOD = 4;
+  protected int CONTACT = 5;
   //save our header or result
   private Drawer result = null;
   private Fragment f;
+
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
@@ -57,13 +51,10 @@ public class MainActivity extends AppCompatActivity
       .withTranslucentStatusBar(false)
       .withActionBarDrawerToggleAnimated(true)
       .addDrawerItems(
-        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(HOME),
         new PrimaryDrawerItem().withName(R.string.drawer_item_schedule).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(SCHEDULE),
         new PrimaryDrawerItem().withName(R.string.drawer_item_events).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(EVENTS),
         new PrimaryDrawerItem().withName(R.string.drawer_item_maps).withIcon(FontAwesome.Icon.faw_map_marker).withIdentifier(MAP),
         new PrimaryDrawerItem().withName(R.string.drawer_item_food).withIcon(FontAwesome.Icon.faw_cutlery).withIdentifier(FOOD),
-        new PrimaryDrawerItem().withName(R.string.drawer_item_register_informals).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(INFORMAL),
-        new PrimaryDrawerItem().withName(R.string.drawer_item_results).withIcon(FontAwesome.Icon.faw_bar_chart).withIdentifier(RESULT),
         new PrimaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_users).withIdentifier(CONTACT))
       .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
       {
@@ -78,62 +69,33 @@ public class MainActivity extends AppCompatActivity
           //those items don't contain a drawerItem
           if (drawerItem != null)
           {
-            if (drawerItem.getIdentifier() == HOME)
+            if (drawerItem.getIdentifier() == SCHEDULE)
             {
-              try
-              {
-                getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
-              }
-              catch (NullPointerException e)
-              {
-                //TODO : write a lot of Log statements.
-              }
-              //ignore the NotificationFragment and it's layout it's just to showcase the handle with an keyboard
-              f = NotificationFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
-              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-              showSnackBar("Home");
-            }
-            else if (drawerItem.getIdentifier() == SCHEDULE)
-            {
+              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = ScheduleFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-              showSnackBar("Schedule");
             }
             else if (drawerItem.getIdentifier() == EVENTS)
             {
+              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = EventFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-              showSnackBar("Events");
             }
             else if (drawerItem.getIdentifier() == MAP)
             {
-              f = MapFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
-              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-              showSnackBar("Map");
+              onMap();
             }
             else if (drawerItem.getIdentifier() == FOOD)
             {
+              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = FoodFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-              showSnackBar("Food Courts");
-            }
-            else if (drawerItem.getIdentifier() == INFORMAL)
-            {
-              f = InformalFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
-              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-              showSnackBar("Informals");
-            }
-            else if (drawerItem.getIdentifier() == RESULT)
-            {
-              f = ResultFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
-              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-              showSnackBar("Results");
             }
             else if (drawerItem.getIdentifier() == CONTACT)
             {
+              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = ContactFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-              showSnackBar("Contact");
             }
           }
           return false;
@@ -194,4 +156,8 @@ public class MainActivity extends AppCompatActivity
     }
   }
 
+  private void onMap()
+  {
+    startActivity(new Intent(this, MapsActivity.class));
+  }
 }
