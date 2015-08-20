@@ -5,11 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.antaragni.antaragni.R;
-import in.antaragni.antaragni.datamodels.SampleData;
-
 import java.util.Arrays;
 import java.util.List;
+
+import in.antaragni.antaragni.R;
+import in.antaragni.antaragni.datamodels.SampleData;
 
 /**
  * Created by shikher on 4/7/15.

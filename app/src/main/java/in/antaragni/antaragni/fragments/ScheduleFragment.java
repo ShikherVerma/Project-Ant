@@ -1,16 +1,17 @@
 package in.antaragni.antaragni.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import in.antaragni.antaragni.R;
+import in.antaragni.antaragni.adapters.ViewPagerAdapter;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- */
 public class ScheduleFragment extends Fragment {
   private static final String KEY_TITLE = "title";
 
@@ -31,8 +32,21 @@ public class ScheduleFragment extends Fragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    // don't look at this layout it's just a listView to show how to handle the keyboard
-    return inflater.inflate(R.layout.fragment_schedule, container, false);
+      View result = inflater.inflate(R.layout.fragment_schedule, container, false);
+      ViewPager pager = (ViewPager) result.findViewById(R.id.vpPager);
+
+      pager.setAdapter(buildAdapter());
+
+      // Give the TabLayout the ViewPager
+      TabLayout tabLayout = (TabLayout) result.findViewById(R.id.sliding_tabs);
+      tabLayout.setupWithViewPager(pager);
+
+      return (result);
   }
+
+  private PagerAdapter buildAdapter()
+  {
+    return (new ViewPagerAdapter(getChildFragmentManager()));
+  }
+
 }
