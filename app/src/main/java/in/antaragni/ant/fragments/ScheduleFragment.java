@@ -1,4 +1,4 @@
-package in.antaragni.antaragni.fragments;
+package in.antaragni.ant.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.antaragni.antaragni.R;
-import in.antaragni.antaragni.adapters.ViewPagerAdapter;
+import in.antaragni.ant.R;
+import in.antaragni.ant.adapters.ViewPagerAdapter;
 
 public class ScheduleFragment extends Fragment {
   private static final String KEY_TITLE = "title";

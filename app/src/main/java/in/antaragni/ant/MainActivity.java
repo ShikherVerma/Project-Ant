@@ -1,4 +1,4 @@
-package in.antaragni.antaragni;
+package in.antaragni.ant;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,10 +17,10 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.KeyboardUtil;
 
-import in.antaragni.antaragni.fragments.ContactFragment;
-import in.antaragni.antaragni.fragments.EventFragment;
-import in.antaragni.antaragni.fragments.FoodFragment;
-import in.antaragni.antaragni.fragments.ScheduleFragment;
+import in.antaragni.ant.fragments.ContactFragment;
+import in.antaragni.ant.fragments.EventFragment;
+import in.antaragni.ant.fragments.FoodFragment;
+import in.antaragni.ant.fragments.ScheduleFragment;
 
 public class MainActivity extends AppCompatActivity
 {

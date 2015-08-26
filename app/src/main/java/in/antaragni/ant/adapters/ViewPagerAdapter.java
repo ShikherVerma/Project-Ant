@@ -1,10 +1,10 @@
-package in.antaragni.antaragni.adapters;
+package in.antaragni.ant.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import in.antaragni.antaragni.fragments.RecyclerViewFragment;
+import in.antaragni.ant.fragments.RecyclerViewFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter
 {

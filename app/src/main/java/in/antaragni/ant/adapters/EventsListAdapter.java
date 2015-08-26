@@ -1,4 +1,4 @@
-package in.antaragni.antaragni.adapters;
+package in.antaragni.ant.adapters;
 
 import android.content.Context;
 import android.media.Image;
@@ -11,9 +11,9 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import in.antaragni.antaragni.R;
-import in.antaragni.antaragni.datamodels.Event;
-import in.antaragni.antaragni.datamodels.Venue;
+import in.antaragni.ant.R;
+import in.antaragni.ant.datamodels.Event;
+import in.antaragni.ant.datamodels.Venue;
 
 /**
  * Created by shikher on 4/7/15.

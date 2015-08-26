@@ -1,4 +1,4 @@
-package in.antaragni.antaragni;
+package in.antaragni.ant;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;

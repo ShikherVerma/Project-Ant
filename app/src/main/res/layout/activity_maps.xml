@@ -3,5 +3,5 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:id="@+id/map"
-          tools:context="in.antaragni.antaragni.MapsActivity"
+          tools:context="in.antaragni.ant.MapsActivity"
           android:name="com.google.android.gms.maps.SupportMapFragment"/>

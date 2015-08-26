@@ -1,4 +1,4 @@
-package in.antaragni.antaragni.fragments;
+package in.antaragni.ant.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,20 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.antaragni.antaragni.R;
+import in.antaragni.ant.R;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class ContactFragment extends Fragment {
+public class EventFragment extends Fragment {
   private static final String KEY_TITLE = "title";
 
-  public ContactFragment() {
+  public EventFragment() {
     // Required empty public constructor
   }
 
-  public static ContactFragment newInstance(String title) {
-    ContactFragment f = new ContactFragment();
+  public static EventFragment newInstance(String title) {
+    EventFragment f = new EventFragment();
 
     Bundle args = new Bundle();
 
@@ -33,6 +33,6 @@ public class ContactFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     // don't look at this layout it's just a listView to show how to handle the keyboard
-    return inflater.inflate(R.layout.fragment_contacts, container, false);
+    return inflater.inflate(R.layout.fragment_events, container, false);
   }
 }

@@ -1,4 +1,4 @@
-package in.antaragni.antaragni.fragments;
+package in.antaragni.ant.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,20 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.antaragni.antaragni.R;
+import in.antaragni.ant.R;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class FoodFragment extends Fragment {
+public class MapFragment extends Fragment {
   private static final String KEY_TITLE = "title";
 
-  public FoodFragment() {
+  public MapFragment() {
     // Required empty public constructor
   }
 
-  public static FoodFragment newInstance(String title) {
-    FoodFragment f = new FoodFragment();
+  public static MapFragment newInstance(String title) {
+    MapFragment f = new MapFragment();
 
     Bundle args = new Bundle();
 
@@ -33,6 +33,6 @@ public class FoodFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     // don't look at this layout it's just a listView to show how to handle the keyboard
-    return inflater.inflate(R.layout.fragment_food, container, false);
+    return inflater.inflate(R.layout.fragment_map, container, false);
   }
 }
