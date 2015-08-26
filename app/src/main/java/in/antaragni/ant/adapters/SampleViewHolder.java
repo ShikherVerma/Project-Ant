@@ -1,10 +1,10 @@
-package in.antaragni.antaragni.adapters;
+package in.antaragni.ant.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import in.antaragni.antaragni.R;
+import in.antaragni.ant.R;
 
 /**
  * Created by shikher on 4/7/15.

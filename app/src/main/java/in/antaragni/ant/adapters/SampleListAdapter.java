@@ -1,4 +1,4 @@
-package in.antaragni.antaragni.adapters;
+package in.antaragni.ant.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import java.util.Arrays;
 import java.util.List;
 
-import in.antaragni.antaragni.R;
-import in.antaragni.antaragni.datamodels.SampleData;
+import in.antaragni.ant.R;
+import in.antaragni.ant.datamodels.SampleData;
 
 /**
  * Created by shikher on 4/7/15.

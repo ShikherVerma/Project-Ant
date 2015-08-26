@@ -1,4 +1,4 @@
-package in.antaragni.antaragni.fragments;
+package in.antaragni.ant.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import in.antaragni.antaragni.R;
-import in.antaragni.antaragni.adapters.SampleListAdapter;
+import in.antaragni.ant.R;
+import in.antaragni.ant.adapters.SampleListAdapter;
 
 public class RecyclerViewFragment extends Fragment
 {

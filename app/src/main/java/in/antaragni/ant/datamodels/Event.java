@@ -1,4 +1,4 @@
-package in.antaragni.antaragni.datamodels;
+package in.antaragni.ant.datamodels;
 
 import android.graphics.drawable.Drawable;
 
@@ -14,7 +14,7 @@ public class Event
   private final String name;                    //name of the event
   private final GregorianCalendar start_time;   //start time of the event
   private final GregorianCalendar end_time;     //end time of the event
-  private final int day;                        //day of antaragni. i.e. day 1,2,3 or 4
+  private final int day;                        //day of ant. i.e. day 1,2,3 or 4
   private final Venue venue;                    //Venue of the event
   private final String description;             //description of the event, must be more than 50 works
   private final Drawable Drawable;

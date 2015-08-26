@@ -1,4 +1,4 @@
-package in.antaragni.antaragni.datamodels;
+package in.antaragni.ant.datamodels;
 
 /**
  * Created by shikher on 4/7/15.
