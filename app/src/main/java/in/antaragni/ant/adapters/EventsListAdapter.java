@@ -25,7 +25,7 @@ public class EventsListAdapter extends RecyclerView.Adapter<SampleViewHolder>
 
   public EventsListAdapter(Context context)
   {
-    List<Event> schedule = Arrays.asList(
+    List<Event> schedule = Arrays.asList(/*
       new Event("Inauguration", "Director's Adress", new GregorianCalendar(2015, 10, 29, 00, 00, 00),
         new GregorianCalendar(2015, 10, 29, 00, 00, 00), 1, new Venue("Auditorium"), getRandomDescription(),
         context.getResources().getDrawable(R.drawable.bheed)),
@@ -60,7 +60,7 @@ public class EventsListAdapter extends RecyclerView.Adapter<SampleViewHolder>
 
       new Event("Pronites", "Prima Nocte", new GregorianCalendar(2015, 10, 29, 00, 00, 00),
         new GregorianCalendar(2015, 10, 29, 00, 00, 00), 1, new Venue("Audi Ground"), getRandomDescription(),
-        context.getResources().getDrawable(R.drawable.bheed))
+        context.getResources().getDrawable(R.drawable.bheed))*/
     );
     this.schedule = schedule;
   }

@@ -4,9 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import java.util.GregorianCalendar;
 
-/**
- * Created by shikher on 4/7/15.
- */
+
 
 public class Event
 {
@@ -17,9 +15,9 @@ public class Event
   private final int day;                        //day of ant. i.e. day 1,2,3 or 4
   private final Venue venue;                    //Venue of the event
   private final String description;             //description of the event, must be more than 50 works
-  private final Drawable Drawable;
+  private final Contact contact;
 
-  public Event(String category, String name,  GregorianCalendar start_time, GregorianCalendar end_time, int day, Venue venue,  String description, Drawable Drawable)
+  public Event(String category, String name,  GregorianCalendar start_time, GregorianCalendar end_time, int day, Venue venue,  String description, Contact contact)
   {
     this.category = category;
     this.name = name;
@@ -28,7 +26,7 @@ public class Event
     this.day = day;
     this.venue = venue;
     this.description = description;
-    this.Drawable = Drawable;
+    this.contact = contact;
   }
 
   public String getCategory()
@@ -61,8 +59,7 @@ public class Event
     return description;
   }
 
-  public Drawable getDrawable()
-  {
-    return Drawable;
-  }
+  public Contact getContact() { return  contact; }
+
+
 }
