@@ -8,4 +8,8 @@
   <dimen name="inter_card_half_spacing">4dp</dimen>
   <dimen name="card_padding">2dp</dimen>
   <dimen name="quiz_question_text_size">24sp</dimen>
+  <dimen name="list_item_avatar_size">40dp</dimen>
+
+  <!--card lib default height of card -->
+  <dimen name="card_base_empty_height">40dp</dimen>
 </resources>

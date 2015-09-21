@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+  <!-- To display the category of the event -->
+  <TextView
+    android:id="@+id/card_category_title"
+    android:layout_width="0sp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_weight="1"
+    android:clickable="true"
+    android:gravity="center"
+    android:text="text 1" />
+
+  <!-- To display the venue of the event -->
+  <TextView
+    android:id="@+id/card_venue_title"
+    android:layout_width="0sp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:clickable="true"
+    android:gravity="center"
+    android:text="text 2" />
+
+  <!-- To display the timing of the event -->
+  <TextView
+    android:id="@+id/card_time_title"
+    android:layout_width="0sp"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:layout_weight="1"
+    android:clickable="true"
+    android:gravity="center"
+    android:text="text 3" />
+
+</LinearLayout>

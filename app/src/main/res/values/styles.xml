@@ -3,14 +3,33 @@
   <style name="AppTheme" parent="@style/MaterialDrawerTheme"><!-- ...and here we setting appcompat’s color theme attrs-->
     <item name="colorPrimary">#212121</item>
     <item name="colorPrimaryDark">#212121</item>
+    <item name="android:textColor">@color/md_black_900</item>
     <item name="colorAccent">#02A8F3</item>
     <!-- MaterialDrawer specific values -->
     <item name="material_drawer_selected_text">@color/md_yellow_400</item>
     <item name="material_drawer_header_selection_text">
       @color/material_drawer_dark_primary_text
     </item>
-
     <item name="windowActionModeOverlay">true</item>
+    <item name="android:popupMenuStyle">@style/PopupMenu</item>
+  </style>
+
+  <!-- style for popup menu -->
+  <style name="PopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
+    <item name="android:popupBackground">@android:color/white</item>
+  </style>
+
+  <!-- style for the card list in day_view-->
+  <style name="native_list_card" >
+    <item name="android:layout_marginLeft">@dimen/native_list_card_margin_left</item>
+    <item name="android:layout_marginRight">@dimen/native_list_card_margin_right</item>
+    <item name="android:layout_marginBottom">@dimen/native_list_card_margin_bottom</item>
+    <item name="android:layout_marginTop">@dimen/native_list_card_margin_top</item>
+  </style>
+
+  <!-- Other Button in Header for CardViewNative-->
+  <style name="card.native.header_button_base.other">
+    <item name="android:background">@drawable/ic_notifications_none_black_24dp</item>
   </style>
 
   <!-- style for the tabs -->
@@ -26,4 +45,5 @@
     <item name="android:textColor">@color/md_white_1000</item>
     <item name="textAllCaps">true</item>
   </style>
+
 </resources>
