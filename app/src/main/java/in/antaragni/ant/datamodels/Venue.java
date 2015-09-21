@@ -1,21 +1,20 @@
 package in.antaragni.ant.datamodels;
 
-/**
- * Created by shikher on 4/7/15.
- */
+import com.google.android.gms.maps.model.LatLng;
 
-public class Venue
-{
+
+public class Venue {
   private final String location;
-  //add google map marker and other things that you can think of
+  private LatLng latLng;
 
-  public Venue(String location)
-  {
+  public Venue(String location,LatLng latLng) {
     this.location = location;
+    this.latLng = latLng;
   }
 
   public String getLocation()
   {
     return location;
   }
+  public LatLng getLatLng() { return latLng;}
 }
