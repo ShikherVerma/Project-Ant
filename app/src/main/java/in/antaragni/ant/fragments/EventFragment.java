@@ -35,4 +35,5 @@ public class EventFragment extends Fragment {
     // don't look at this layout it's just a listView to show how to handle the keyboard
     return inflater.inflate(R.layout.fragment_events, container, false);
   }
+
 }
