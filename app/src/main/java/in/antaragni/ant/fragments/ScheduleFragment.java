@@ -8,18 +8,26 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import in.antaragni.ant.R;
+import in.antaragni.ant.adapters.ScheduleViewPagerAdapter;
 import in.antaragni.ant.adapters.ViewPagerAdapter;
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.view.CardViewNative;
 
-public class ScheduleFragment extends Fragment {
+public class ScheduleFragment extends Fragment
+{
   private static final String KEY_TITLE = "title";
 
-  public ScheduleFragment() {
+  public ScheduleFragment()
+  {
     // Required empty public constructor
   }
 
-  public static ScheduleFragment newInstance(String title) {
+  public static ScheduleFragment newInstance(String title)
+  {
     ScheduleFragment f = new ScheduleFragment();
 
     Bundle args = new Bundle();
@@ -31,22 +39,22 @@ public class ScheduleFragment extends Fragment {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      View result = inflater.inflate(R.layout.fragment_schedule, container, false);
-      ViewPager pager = (ViewPager) result.findViewById(R.id.vpPager);
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+  {
+    View result = inflater.inflate(R.layout.fragment_schedule, container, false);
+    ViewPager pager = (ViewPager) result.findViewById(R.id.vpPager);
+    pager.setAdapter(buildAdapter());
 
-      pager.setAdapter(buildAdapter());
+    // Give the TabLayout the ViewPager
+    TabLayout tabLayout = (TabLayout) result.findViewById(R.id.sliding_tabs);
+    tabLayout.setupWithViewPager(pager);
 
-      // Give the TabLayout the ViewPager
-      TabLayout tabLayout = (TabLayout) result.findViewById(R.id.sliding_tabs);
-      tabLayout.setupWithViewPager(pager);
-
-      return (result);
+    return (result);
   }
 
   private PagerAdapter buildAdapter()
   {
-    return (new ViewPagerAdapter(getChildFragmentManager()));
+    return (new ScheduleViewPagerAdapter(getChildFragmentManager()));
   }
 
 }

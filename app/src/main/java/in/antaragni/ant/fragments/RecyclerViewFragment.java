@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import in.antaragni.ant.R;
 import in.antaragni.ant.adapters.SampleListAdapter;
@@ -37,7 +36,7 @@ public class RecyclerViewFragment extends Fragment
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_recycler_view, container, false);
+    View view = inflater.inflate(R.layout.inner_fragment_recycler_view, container, false);
 
     RecyclerView rv = (RecyclerView) view.findViewById(R.id.sample_recycler_view);
     rv.setLayoutManager(new LinearLayoutManager(getActivity()));
