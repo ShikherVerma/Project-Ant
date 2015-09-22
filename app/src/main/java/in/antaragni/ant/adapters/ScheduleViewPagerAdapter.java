@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import in.antaragni.ant.fragments.DayViewFragment;
-import in.antaragni.ant.fragments.RecyclerViewFragment;
 
 public class ScheduleViewPagerAdapter extends FragmentPagerAdapter
 {
