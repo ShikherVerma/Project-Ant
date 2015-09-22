@@ -1,12 +1,16 @@
 package in.antaragni.ant.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import in.antaragni.ant.R;
+import in.antaragni.ant.adapters.EventsViewPagerAdapter;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -30,10 +34,23 @@ public class EventFragment extends Fragment {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+  {
     // Inflate the layout for this fragment
     // don't look at this layout it's just a listView to show how to handle the keyboard
-    return inflater.inflate(R.layout.fragment_events, container, false);
+    View result = inflater.inflate(R.layout.fragment_events, container, false);
+    ViewPager pager = (ViewPager) result.findViewById(R.id.vpPager);
+    pager.setAdapter(buildAdapter());
+
+    // Give the TabLayout the ViewPager
+    TabLayout tabLayout = (TabLayout) result.findViewById(R.id.sliding_tabs);
+    tabLayout.setupWithViewPager(pager);
+
+    return (result);
   }
 
+  private PagerAdapter buildAdapter()
+  {
+    return (new EventsViewPagerAdapter(getChildFragmentManager()));
+  }
 }
