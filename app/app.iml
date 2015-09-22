@@ -135,8 +135,8 @@
     <orderEntry type="library" exported="" name="cardslib-cards-2.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-location-7.8.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
-    <orderEntry type="library" exported="" name="kenburnsview-1.0.6" level="project" />
     <orderEntry type="library" exported="" name="sqliteassethelper-2.0.1" level="project" />
+    <orderEntry type="library" exported="" name="kenburnsview-1.0.6" level="project" />
     <orderEntry type="library" exported="" name="design-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-nearby-7.8.0" level="project" />
     <orderEntry type="library" exported="" name="cardslib-extra-staggeredgrid-2.1.0" level="project" />
