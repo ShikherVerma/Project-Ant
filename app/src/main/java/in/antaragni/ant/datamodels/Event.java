@@ -1,9 +1,6 @@
 package in.antaragni.ant.datamodels;
 
-import android.graphics.drawable.Drawable;
-
 import java.util.GregorianCalendar;
-
 
 
 public class Event
@@ -17,7 +14,7 @@ public class Event
   private final String description;             //description of the event, must be more than 50 works
   private final Contact contact;
 
-  public Event(String category, String name,  GregorianCalendar start_time, GregorianCalendar end_time, int day, Venue venue,  String description, Contact contact)
+  public Event(String category, String name, GregorianCalendar start_time, GregorianCalendar end_time, int day, Venue venue, String description, Contact contact)
   {
     this.category = category;
     this.name = name;
@@ -59,7 +56,10 @@ public class Event
     return description;
   }
 
-  public Contact getContact() { return  contact; }
+  public Contact getContact()
+  {
+    return contact;
+  }
 
   public Venue getVenue() { return  venue; }
 

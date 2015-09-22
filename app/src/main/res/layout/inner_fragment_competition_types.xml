@@ -40,56 +40,56 @@
         style="@style/card_external"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/native_material_largeimage_card" />
+        card:card_layout_resourceID="@layout/native_material_largeimage_card"/>
 
       <it.gmariotti.cardslib.library.view.CardViewNative
         android:id="@+id/card_dramatics"
         style="@style/card_external"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/native_material_largeimage_card" />
+        card:card_layout_resourceID="@layout/native_material_largeimage_card"/>
 
       <it.gmariotti.cardslib.library.view.CardViewNative
         android:id="@+id/card_music"
         style="@style/card_external"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/native_material_largeimage_card" />
+        card:card_layout_resourceID="@layout/native_material_largeimage_card"/>
 
       <it.gmariotti.cardslib.library.view.CardViewNative
         android:id="@+id/card_fine_arts"
         style="@style/card_external"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/native_material_largeimage_card" />
+        card:card_layout_resourceID="@layout/native_material_largeimage_card"/>
 
       <it.gmariotti.cardslib.library.view.CardViewNative
         android:id="@+id/card_english_lits"
         style="@style/card_external"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/native_material_largeimage_card" />
+        card:card_layout_resourceID="@layout/native_material_largeimage_card"/>
 
       <it.gmariotti.cardslib.library.view.CardViewNative
         android:id="@+id/card_hindi_lits"
         style="@style/card_external"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/native_material_largeimage_card" />
+        card:card_layout_resourceID="@layout/native_material_largeimage_card"/>
 
       <it.gmariotti.cardslib.library.view.CardViewNative
         android:id="@+id/card_quiz"
         style="@style/card_external"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/native_material_largeimage_card" />
+        card:card_layout_resourceID="@layout/native_material_largeimage_card"/>
 
       <it.gmariotti.cardslib.library.view.CardViewNative
         android:id="@+id/card_films"
         style="@style/card_external"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:card_layout_resourceID="@layout/native_material_largeimage_card" />
+        card:card_layout_resourceID="@layout/native_material_largeimage_card"/>
 
     </LinearLayout>
 
