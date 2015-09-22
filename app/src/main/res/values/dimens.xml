@@ -12,4 +12,7 @@
 
   <!--card lib default height of card -->
   <dimen name="card_base_empty_height">40dp</dimen>
+
+  <!--used in competition layout for material cards -->
+  <dimen name="carddemo_keyline_1_minus_8dp">8dp</dimen>
 </resources>
