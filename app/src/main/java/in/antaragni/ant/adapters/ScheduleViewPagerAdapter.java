@@ -30,13 +30,13 @@ public class ScheduleViewPagerAdapter extends FragmentPagerAdapter
     switch (position)
     {
       case 0:
-        return DayViewFragment.newInstance(0);
-      case 1:
         return DayViewFragment.newInstance(1);
-      case 2:
+      case 1:
         return DayViewFragment.newInstance(2);
-      case 3:
+      case 2:
         return DayViewFragment.newInstance(3);
+      case 3:
+        return DayViewFragment.newInstance(4);
       default:
         return null;
     }
