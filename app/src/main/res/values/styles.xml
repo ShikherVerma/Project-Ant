@@ -27,11 +27,6 @@
     <item name="android:layout_marginTop">@dimen/native_list_card_margin_top</item>
   </style>
 
-  <!-- Other Button in Header for CardViewNative-->
-  <style name="card.native.header_button_base.other">
-    <item name="android:background">@drawable/ic_notifications_none_black_24dp</item>
-  </style>
-
   <!-- style for the tabs -->
   <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
     <item name="tabIndicatorColor">@color/md_yellow_400</item>

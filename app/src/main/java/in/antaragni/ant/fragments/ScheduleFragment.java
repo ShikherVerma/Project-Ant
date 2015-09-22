@@ -8,14 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import in.antaragni.ant.R;
 import in.antaragni.ant.adapters.ScheduleViewPagerAdapter;
-import in.antaragni.ant.adapters.ViewPagerAdapter;
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.view.CardViewNative;
 
 public class ScheduleFragment extends Fragment
 {
