@@ -3,6 +3,7 @@ package in.antaragni.ant.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +15,12 @@ import com.nhaarman.listviewanimations.appearance.AnimationAdapter;
 import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import in.antaragni.ant.R;
+import in.antaragni.ant.datahandler.DatabaseAccess;
+import in.antaragni.ant.datamodels.Event;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.CardHeader;
@@ -26,6 +31,7 @@ public class DayViewFragment extends Fragment
 {
   // Store instance variables
   private int mDay;
+  private DatabaseAccess databaseAccess;
 
   // newInstance constructor for creating fragment with arguments
   public static DayViewFragment newInstance(int day)
@@ -42,19 +48,22 @@ public class DayViewFragment extends Fragment
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    mDay = getArguments().getInt("Day Number", 0);
+    mDay = getArguments().getInt("Day Number", 1);
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState)
   {
+    databaseAccess = DatabaseAccess.getInstance(getActivity());
+    databaseAccess.open();
+    List<Event> eventList = databaseAccess.getEvent(mDay);
+    databaseAccess.close();
     View view = inflater.inflate(R.layout.inner_fragment_day_view, container, false);
     ArrayList<Card> cards = new ArrayList<Card>();
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < eventList.size(); i++)
     {
-      CardExample card = new CardExample(getActivity(), "My title " + i, "Inner text " + i);
-
+      CardExample card = new CardExample(getActivity(), eventList.get(i));
       cards.add(card);
     }
     CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity(), cards);
@@ -68,14 +77,12 @@ public class DayViewFragment extends Fragment
   public class CardExample extends Card
   {
 
-    protected String mTitleHeader;
-    protected String mTitleMain;
+    private Event event;
 
-    public CardExample(Context context, String titleHeader, String titleMain)
+    public CardExample(Context context, Event event)
     {
       super(context, R.layout.lib_card_example_inner_content);
-      this.mTitleHeader = titleHeader;
-      this.mTitleMain = titleMain;
+      this.event = event;
 
       init();
     }
@@ -86,7 +93,7 @@ public class DayViewFragment extends Fragment
       CardHeader header = new CardHeader(getActivity());
 
       //Set the header title
-      header.setTitle(mTitleHeader);
+      header.setTitle(event.getName());
 
       //Add a popup menu. This method set OverFlow button to visible
       header.setPopupMenu(R.menu.popupmain, new CardHeader.OnClickCardHeaderPopupMenuListener()
@@ -94,7 +101,7 @@ public class DayViewFragment extends Fragment
         @Override
         public void onMenuItemClick(BaseCard card, MenuItem item)
         {
-          Toast.makeText(getActivity(), "Click on card menu" + mTitleHeader + " item=" + item.getTitle(), Toast.LENGTH_SHORT).show();
+          Toast.makeText(getActivity(), "Click on card menu" + event.getName() + " item=" + item.getTitle(), Toast.LENGTH_SHORT).show();
         }
       });
       addCardHeader(header);
@@ -105,7 +112,7 @@ public class DayViewFragment extends Fragment
         @Override
         public void onClick(Card card, View view)
         {
-          Toast.makeText(getContext(), "Click Listener card=" + mTitleHeader, Toast.LENGTH_SHORT).show();
+          Toast.makeText(getContext(), "Click Listener card=" + event.getName(), Toast.LENGTH_SHORT).show();
         }
       });
     }
@@ -121,12 +128,10 @@ public class DayViewFragment extends Fragment
 
       if (categoryTitle != null)
       {
-        categoryTitle.setText("category");
-        categoryTitle.setOnClickListener(new View.OnClickListener()
-        {
+        categoryTitle.setText(event.getCategory());
+        categoryTitle.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View view)
-          {
+          public void onClick(View view) {
             Toast.makeText(getContext(), "Click Listener card category", Toast.LENGTH_SHORT).show();
           }
         });
@@ -134,12 +139,10 @@ public class DayViewFragment extends Fragment
 
       if (venueTitle != null)
       {
-        venueTitle.setText("OAT");
-        venueTitle.setOnClickListener(new View.OnClickListener()
-        {
+        venueTitle.setText(event.getVenue().getLocation());
+        venueTitle.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View view)
-          {
+          public void onClick(View view) {
             Toast.makeText(getContext(), "Click Listener card venue", Toast.LENGTH_SHORT).show();
           }
         });
@@ -147,12 +150,13 @@ public class DayViewFragment extends Fragment
 
       if (timeTitle != null)
       {
-        timeTitle.setText("32:00");
-        timeTitle.setOnClickListener(new View.OnClickListener()
-        {
+        timeTitle.setText(event.getStart_time().get(Calendar.HOUR_OF_DAY) + ":" +
+          event.getStart_time().get(Calendar.MINUTE) + "-" +
+          event.getEnd_time().get(Calendar.HOUR_OF_DAY) + ":" +
+        event.getEnd_time().get(Calendar.MINUTE));
+        timeTitle.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View view)
-          {
+          public void onClick(View view) {
             Toast.makeText(getContext(), "Click Listener card time", Toast.LENGTH_SHORT).show();
           }
         });
