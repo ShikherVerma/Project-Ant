@@ -1,14 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto" >
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_settings"
-        android:title="Set Reminder"
-        android:orderInCategory="100"
-        app:showAsAction="always" />
+  <item
+    android:id="@+id/action_settings"
+    android:title="Set Reminder"
+    android:orderInCategory="100"
+    app:showAsAction="always"/>
 
-    <item android:id="@+id/action_settings2"
-          android:title="View Map"
-          android:orderInCategory="101"
-          app:showAsAction="always" />
+  <item
+    android:id="@+id/action_settings2"
+    android:title="View Map"
+    android:orderInCategory="101"
+    app:showAsAction="always"/>
 
 </menu>

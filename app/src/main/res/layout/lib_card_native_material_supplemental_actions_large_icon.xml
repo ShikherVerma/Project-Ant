@@ -27,32 +27,32 @@
               android:paddingLeft="@dimen/actions_padding_left"
               android:paddingRight="@dimen/actions_padding_left">
 
-    <ImageButton
-        android:id="@+id/ic1"
-        android:scaleType="fitCenter"
-        android:src="@drawable/l_search"
-        android:background="?android:selectableItemBackground"
-        style="@style/card.native.actions.button"
-        android:layout_marginRight="8dp"
-        />
+  <ImageButton
+    android:id="@+id/ic1"
+    android:scaleType="fitCenter"
+    android:src="@drawable/l_search"
+    android:background="?android:selectableItemBackground"
+    style="@style/card.native.actions.button"
+    android:layout_marginRight="8dp"
+    />
 
 
-    <ImageButton
-        android:scaleType="fitCenter"
-        android:id="@+id/ic2"
-        android:background="?android:selectableItemBackground"
-        android:src="@drawable/l_mail"
-        style="@style/card.native.actions.button"
-        android:layout_marginRight="8dp"
-        />
+  <ImageButton
+    android:scaleType="fitCenter"
+    android:id="@+id/ic2"
+    android:background="?android:selectableItemBackground"
+    android:src="@drawable/l_mail"
+    style="@style/card.native.actions.button"
+    android:layout_marginRight="8dp"
+    />
 
-    <ImageButton
-        android:scaleType="fitCenter"
-        android:id="@+id/ic3"
-        android:background="?android:selectableItemBackground"
-        android:src="@drawable/l_trash"
-        style="@style/card.native.actions.button"
-        android:layout_marginRight="8dp"
-        />
+  <ImageButton
+    android:scaleType="fitCenter"
+    android:id="@+id/ic3"
+    android:background="?android:selectableItemBackground"
+    android:src="@drawable/l_trash"
+    style="@style/card.native.actions.button"
+    android:layout_marginRight="8dp"
+    />
 
 </LinearLayout>

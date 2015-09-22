@@ -50,12 +50,18 @@ public class EventsViewPagerAdapter extends FragmentPagerAdapter
   {
     switch (position)
     {
-      case 0 : return "Competition";
-      case 1 : return "Semi Pro";
-      case 2 : return "Pro Nites";
-      case 3 : return "Pro Events";
-      case 4 : return "Social Initiatives";
-      default: return "ERROR";
+      case 0:
+        return "Competition";
+      case 1:
+        return "Semi Pro";
+      case 2:
+        return "Pro Nites";
+      case 3:
+        return "Pro Events";
+      case 4:
+        return "Social Initiatives";
+      default:
+        return "ERROR";
     }
   }
 }

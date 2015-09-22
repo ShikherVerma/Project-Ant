@@ -20,7 +20,7 @@
   </style>
 
   <!-- style for the card list in day_view-->
-  <style name="native_list_card" >
+  <style name="native_list_card">
     <item name="android:layout_marginLeft">@dimen/native_list_card_margin_left</item>
     <item name="android:layout_marginRight">@dimen/native_list_card_margin_right</item>
     <item name="android:layout_marginBottom">@dimen/native_list_card_margin_bottom</item>

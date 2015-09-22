@@ -24,20 +24,5 @@ public class Contact {
     public String getEventname() { return eventname; }
     public String getNumber() { return number; }
     public String getPost() { return post; }
-    public static int getRandomContactDrawable() {
-        switch (RANDOM.nextInt(5)) {
-            default:
-            case 0:
-                return R.drawable.cheese_1;
-            case 1:
-                return R.drawable.cheese_2;
-            case 2:
-                return R.drawable.cheese_3;
-            case 3:
-                return R.drawable.cheese_4;
-            case 4:
-                return R.drawable.cheese_5;
-        }
-    }
 
 }

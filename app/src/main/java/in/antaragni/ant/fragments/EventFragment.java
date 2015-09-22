@@ -15,14 +15,17 @@ import in.antaragni.ant.adapters.EventsViewPagerAdapter;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class EventFragment extends Fragment {
+public class EventFragment extends Fragment
+{
   private static final String KEY_TITLE = "title";
 
-  public EventFragment() {
+  public EventFragment()
+  {
     // Required empty public constructor
   }
 
-  public static EventFragment newInstance(String title) {
+  public static EventFragment newInstance(String title)
+  {
     EventFragment f = new EventFragment();
 
     Bundle args = new Bundle();

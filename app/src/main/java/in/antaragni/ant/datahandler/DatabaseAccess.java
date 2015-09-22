@@ -1,12 +1,10 @@
 package in.antaragni.ant.datahandler;
 
 
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -46,22 +44,11 @@ public class DatabaseAccess {
         }
     }
 
-
-    public Venue getVenue(String loc){
-        String query = "SELECT * FROM venue WHERE location='" + loc +"';";
-        Cursor cursor = database.rawQuery(query,null);
+    private Contact getContact(String eventname) {
+        String query = "SELECT * FROM contacts WHERE eventname='" + eventname + "';";
+        Cursor cursor = database.rawQuery(query, null);
         cursor.moveToFirst();
-        LatLng latLng = new LatLng(cursor.getDouble(1),cursor.getDouble(2));
-        Venue v = new Venue(loc,latLng);
-        cursor.close();
-        return v;
-    }
-
-    private Contact getContact(String eventname){
-        String query = "SELECT * FROM contacts WHERE eventname='" + eventname +"';";
-        Cursor cursor = database.rawQuery(query,null);
-        cursor.moveToFirst();
-        Contact contact = new Contact(cursor.getString(1),cursor.getString(2),cursor.getString(4),cursor.getString(3));
+        Contact contact = new Contact(cursor.getString(1), cursor.getString(2), cursor.getString(4), cursor.getString(3));
         cursor.close();
         return contact;
     }
@@ -72,14 +59,24 @@ public class DatabaseAccess {
         Cursor cursor = database.rawQuery(query, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            GregorianCalendar start_time = new GregorianCalendar(2015,10+(day/4),(28+day+(day/4))%32,cursor.getInt(5)/100,cursor.getInt(5)%100);
-            GregorianCalendar end_time = new GregorianCalendar(2015,10+(day/4),(28+day+(day/4))%32,cursor.getInt(4)/100,cursor.getInt(4)%100);
-            Event event = new Event(cursor.getString(7),cursor.getString(1),start_time,end_time,day,getVenue(cursor.getString(3)),cursor.getString(2),getContact(cursor.getString(1)));
+            GregorianCalendar start_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(5) / 100, cursor.getInt(5) % 100);
+            GregorianCalendar end_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(4) / 100, cursor.getInt(4) % 100);
+            Event event = new Event(cursor.getString(7), cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(1)));
             list.add(event);
             cursor.moveToNext();
         }
         cursor.close();
         return list;
+    }
+
+    public Venue getVenue(String loc) {
+        String query = "SELECT * FROM venue WHERE location='" + loc + "';";
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        LatLng latLng = new LatLng(cursor.getDouble(1), cursor.getDouble(2));
+        Venue v = new Venue(loc, latLng);
+        cursor.close();
+        return v;
     }
 
     public List<Event> getCategory(String category) {
@@ -90,9 +87,9 @@ public class DatabaseAccess {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             day = cursor.getInt(6);
-            GregorianCalendar start_time = new GregorianCalendar(2015,10+(day/4),(28+day+(day/4))%32,cursor.getInt(5)/100,cursor.getInt(5)%100);
-            GregorianCalendar end_time = new GregorianCalendar(2015,10+(day/4),(28+day+(day/4))%32,cursor.getInt(4)/100,cursor.getInt(4)%100);
-            Event event = new Event(category,cursor.getString(1),start_time,end_time,day,getVenue(cursor.getString(3)),cursor.getString(2),getContact(cursor.getString(1)));
+            GregorianCalendar start_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(5) / 100, cursor.getInt(5) % 100);
+            GregorianCalendar end_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(4) / 100, cursor.getInt(4) % 100);
+            Event event = new Event(category, cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(1)));
             list.add(event);
             cursor.moveToNext();
         }
@@ -106,7 +103,7 @@ public class DatabaseAccess {
         Cursor cursor = database.rawQuery(query, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Contact contact = new Contact(cursor.getString(1),cursor.getString(2),cursor.getString(4),cursor.getString(3));
+            Contact contact = new Contact(cursor.getString(1), cursor.getString(2), cursor.getString(4), cursor.getString(3));
             list.add(contact);
             cursor.moveToNext();
         }
@@ -120,7 +117,7 @@ public class DatabaseAccess {
         Cursor cursor = database.rawQuery(query, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Food food = new Food(cursor.getString(1),getVenue(cursor.getString(2)));
+            Food food = new Food(cursor.getString(1), getVenue(cursor.getString(2)));
             list.add(food);
             cursor.moveToNext();
         }

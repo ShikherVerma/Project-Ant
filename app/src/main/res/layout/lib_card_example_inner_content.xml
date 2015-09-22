@@ -13,7 +13,7 @@
     android:layout_weight="1"
     android:clickable="true"
     android:gravity="center"
-    android:text="text 1" />
+    android:text="text 1"/>
 
   <!-- To display the venue of the event -->
   <TextView
@@ -23,7 +23,7 @@
     android:layout_weight="1"
     android:clickable="true"
     android:gravity="center"
-    android:text="text 2" />
+    android:text="text 2"/>
 
   <!-- To display the timing of the event -->
   <TextView
@@ -34,6 +34,6 @@
     android:layout_weight="1"
     android:clickable="true"
     android:gravity="center"
-    android:text="text 3" />
+    android:text="text 3"/>
 
 </LinearLayout>
