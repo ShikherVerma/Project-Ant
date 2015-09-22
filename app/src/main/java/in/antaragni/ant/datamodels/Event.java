@@ -61,5 +61,7 @@ public class Event
 
   public Contact getContact() { return  contact; }
 
+  public Venue getVenue() { return  venue; }
+
 
 }
