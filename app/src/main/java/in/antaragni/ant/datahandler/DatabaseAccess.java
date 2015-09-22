@@ -1,4 +1,4 @@
-package in.antaragni.ant;
+package in.antaragni.ant.datahandler;
 
 
 
@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import in.antaragni.ant.DatabaseOpenHelper;
 import in.antaragni.ant.datamodels.Contact;
 import in.antaragni.ant.datamodels.Event;
 import in.antaragni.ant.datamodels.Food;
