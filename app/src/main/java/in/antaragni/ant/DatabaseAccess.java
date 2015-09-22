@@ -16,6 +16,7 @@ import java.util.List;
 import in.antaragni.ant.DatabaseOpenHelper;
 import in.antaragni.ant.datamodels.Contact;
 import in.antaragni.ant.datamodels.Event;
+import in.antaragni.ant.datamodels.Food;
 import in.antaragni.ant.datamodels.Venue;
 
 public class DatabaseAccess {
@@ -46,7 +47,7 @@ public class DatabaseAccess {
     }
 
 
-    private Venue getVenue(String loc){
+    public Venue getVenue(String loc){
         String query = "SELECT * FROM venue WHERE location='" + loc +"';";
         Cursor cursor = database.rawQuery(query,null);
         cursor.moveToFirst();
@@ -107,6 +108,20 @@ public class DatabaseAccess {
         while (!cursor.isAfterLast()) {
             Contact contact = new Contact(cursor.getString(1),cursor.getString(2),cursor.getString(4),cursor.getString(3));
             list.add(contact);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public List<Food> getFood() {
+        String query = "SELECT * FROM food_courts;";
+        List<Food> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Food food = new Food(cursor.getString(1),getVenue(cursor.getString(2)));
+            list.add(food);
             cursor.moveToNext();
         }
         cursor.close();

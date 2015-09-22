@@ -1,5 +1,6 @@
 package in.antaragni.ant;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -20,10 +21,10 @@ import com.mikepenz.materialdrawer.util.KeyboardUtil;
 import in.antaragni.ant.fragments.ContactFragment;
 import in.antaragni.ant.fragments.EventFragment;
 import in.antaragni.ant.fragments.FoodFragment;
+import in.antaragni.ant.fragments.MapFragment;
 import in.antaragni.ant.fragments.ScheduleFragment;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
   protected int SCHEDULE = 1;
   protected int EVENTS = 2;
   protected int MAP = 3;
@@ -34,8 +35,7 @@ public class MainActivity extends AppCompatActivity
   private Fragment f;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState)
-  {
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
@@ -56,43 +56,33 @@ public class MainActivity extends AppCompatActivity
         new PrimaryDrawerItem().withName(R.string.drawer_item_maps).withIcon(FontAwesome.Icon.faw_map_marker).withIdentifier(MAP),
         new PrimaryDrawerItem().withName(R.string.drawer_item_food).withIcon(FontAwesome.Icon.faw_cutlery).withIdentifier(FOOD),
         new PrimaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_users).withIdentifier(CONTACT))
-      .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
-      {
+      .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
         @Override
         public boolean onItemClick(AdapterView<?> parent, View view, int position,
-                                   long id, IDrawerItem drawerItem)
-        {
+                                   long id, IDrawerItem drawerItem) {
           //check if the drawerItem is set.
           //there are different reasons for the drawerItem to be null
           //--> click on the header
           //--> click on the footer
           //those items don't contain a drawerItem
-          if (drawerItem != null)
-          {
-            if (drawerItem.getIdentifier() == SCHEDULE)
-            {
+          if (drawerItem != null) {
+            if (drawerItem.getIdentifier() == SCHEDULE) {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = ScheduleFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-            }
-            else if (drawerItem.getIdentifier() == EVENTS)
-            {
+            } else if (drawerItem.getIdentifier() == EVENTS) {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = EventFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-            }
-            else if (drawerItem.getIdentifier() == MAP)
-            {
-              onMap();
-            }
-            else if (drawerItem.getIdentifier() == FOOD)
-            {
+            } else if (drawerItem.getIdentifier() == MAP) {
+              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
+              f = MapFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
+              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+            } else if (drawerItem.getIdentifier() == FOOD) {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = FoodFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-            }
-            else if (drawerItem.getIdentifier() == CONTACT)
-            {
+            } else if (drawerItem.getIdentifier() == CONTACT) {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = ContactFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
@@ -101,22 +91,18 @@ public class MainActivity extends AppCompatActivity
           return false;
         }
       })
-      .withOnDrawerListener(new Drawer.OnDrawerListener()
-      {
+      .withOnDrawerListener(new Drawer.OnDrawerListener() {
         @Override
-        public void onDrawerOpened(View drawerView)
-        {
+        public void onDrawerOpened(View drawerView) {
           KeyboardUtil.hideKeyboard(MainActivity.this);
         }
 
         @Override
-        public void onDrawerClosed(View drawerView)
-        {
+        public void onDrawerClosed(View drawerView) {
         }
 
         @Override
-        public void onDrawerSlide(View drawerView, float slideOffset)
-        {
+        public void onDrawerSlide(View drawerView, float slideOffset) {
         }
       })
       .withFireOnInitialOnClick(true)
@@ -129,35 +115,25 @@ public class MainActivity extends AppCompatActivity
 
   }
 
-  public void showSnackBar(String s)
-  {
+  public void showSnackBar(String s) {
     Snackbar.make(findViewById(R.id.main_screen), s, Snackbar.LENGTH_SHORT).show(); // Don’t forget to show!
   }
 
   @Override
-  protected void onSaveInstanceState(Bundle outState)
-  {
+  protected void onSaveInstanceState(Bundle outState) {
     //add the values which need to be saved from the drawer to the bundle
     outState = result.saveInstanceState(outState);
     super.onSaveInstanceState(outState);
   }
 
   @Override
-  public void onBackPressed()
-  {
+  public void onBackPressed() {
     //handle the back press :D close the drawer first and if the drawer is closed close the activity
-    if (result != null && result.isDrawerOpen())
-    {
+    if (result != null && result.isDrawerOpen()) {
       result.closeDrawer();
-    }
-    else
-    {
+    } else {
       super.onBackPressed();
     }
   }
 
-  private void onMap()
-  {
-    startActivity(new Intent(this, MapsActivity.class));
-  }
 }
