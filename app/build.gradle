@@ -52,4 +52,7 @@ dependencies {
   compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
   compile 'com.cocosw:bottomsheet:1.+@aar'
 
+    //for gcm
+    compile "com.google.android.gms:play-services-gcm:7.8.0"
+
 }
