@@ -50,4 +50,15 @@
     <item name="android:paddingTop">@dimen/carddemo_keyline_1_minus_8dp</item>
     <item name="android:paddingBottom">@dimen/carddemo_keyline_1_minus_8dp</item>
   </style>
+
+  <!-- theme for details activity -->
+
+  <style name="Widget.CardContent" parent="android:Widget">
+    <item name="android:paddingLeft">16dp</item>
+    <item name="android:paddingRight">16dp</item>
+    <item name="android:paddingTop">24dp</item>
+    <item name="android:paddingBottom">24dp</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
 </resources>

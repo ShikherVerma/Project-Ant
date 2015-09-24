@@ -1,6 +1,7 @@
 package in.antaragni.ant.fragments.inner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import in.antaragni.ant.EventDetailActivity;
 import in.antaragni.ant.R;
 import in.antaragni.ant.datahandler.DatabaseAccess;
 import in.antaragni.ant.datamodels.Event;
@@ -113,6 +115,12 @@ public class DayViewFragment extends Fragment
         public void onClick(Card card, View view)
         {
           Toast.makeText(getContext(), "Click Listener card=" + event.getName(), Toast.LENGTH_SHORT).show();
+          Intent i = new Intent(getActivity(), EventDetailActivity.class);
+          Log.wtf("antaragni","starting activity");
+          String strName = event.getName();
+
+          i.putExtra("event name", strName);
+          startActivity(i);
         }
       });
     }

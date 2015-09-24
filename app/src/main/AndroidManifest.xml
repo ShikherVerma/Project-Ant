@@ -38,7 +38,7 @@ The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-
+    <activity android:name=".EventDetailActivity" />
     <meta-data
       android:name="com.google.android.gms.version"
       android:value="@integer/google_play_services_version"/>
