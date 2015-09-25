@@ -20,16 +20,11 @@
   </style>
 
   <!-- style for the card list in day_view-->
-  <style name="native_list_card" >
+  <style name="native_list_card">
     <item name="android:layout_marginLeft">@dimen/native_list_card_margin_left</item>
     <item name="android:layout_marginRight">@dimen/native_list_card_margin_right</item>
     <item name="android:layout_marginBottom">@dimen/native_list_card_margin_bottom</item>
     <item name="android:layout_marginTop">@dimen/native_list_card_margin_top</item>
-  </style>
-
-  <!-- Other Button in Header for CardViewNative-->
-  <style name="card.native.header_button_base.other">
-    <item name="android:background">@drawable/ic_notifications_none_black_24dp</item>
   </style>
 
   <!-- style for the tabs -->
@@ -46,4 +41,13 @@
     <item name="textAllCaps">true</item>
   </style>
 
+  <!-- used in competition layout for material cards -->
+  <style name="carddemo_default_container_padding">
+    <item name="android:clipToPadding">false</item>
+    <item name="android:scrollbarStyle">outsideOverlay</item>
+    <item name="android:paddingLeft">@dimen/carddemo_keyline_1_minus_8dp</item>
+    <item name="android:paddingRight">@dimen/carddemo_keyline_1_minus_8dp</item>
+    <item name="android:paddingTop">@dimen/carddemo_keyline_1_minus_8dp</item>
+    <item name="android:paddingBottom">@dimen/carddemo_keyline_1_minus_8dp</item>
+  </style>
 </resources>

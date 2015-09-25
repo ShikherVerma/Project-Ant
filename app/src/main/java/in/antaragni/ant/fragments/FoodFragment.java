@@ -11,14 +11,17 @@ import in.antaragni.ant.R;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class FoodFragment extends Fragment {
+public class FoodFragment extends Fragment
+{
   private static final String KEY_TITLE = "title";
 
-  public FoodFragment() {
+  public FoodFragment()
+  {
     // Required empty public constructor
   }
 
-  public static FoodFragment newInstance(String title) {
+  public static FoodFragment newInstance(String title)
+  {
     FoodFragment f = new FoodFragment();
 
     Bundle args = new Bundle();
@@ -30,7 +33,8 @@ public class FoodFragment extends Fragment {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+  {
     // Inflate the layout for this fragment
     // don't look at this layout it's just a listView to show how to handle the keyboard
     return inflater.inflate(R.layout.fragment_food, container, false);
