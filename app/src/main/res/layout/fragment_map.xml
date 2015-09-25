@@ -1,50 +1,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="in.antaragni.ant.fragments.MapFragment">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="in.antaragni.ant.fragments.MapFragment">
 
   <!-- TODO: Update blank fragment layout -->
-    <fragment
-        android:id="@+id/frag_map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"/>
+  <fragment
+    android:id="@+id/frag_map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    class="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_alignParentLeft="true"
+    android:layout_marginLeft="0dp"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="0dp"/>
 
 
-    <Spinner
-        android:layout_width="141dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/from_dropdown_list"
-        android:layout_gravity="left|bottom"
-        android:layout_alignTop="@+id/to_dropdown_list"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+  <Spinner
+    android:layout_width="141dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/from_dropdown_list"
+    android:layout_gravity="left|bottom"
+    android:layout_alignTop="@+id/to_dropdown_list"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"/>
 
-    <Spinner
-        android:layout_width="141dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/to_dropdown_list"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/from_dropdown_list"
-        android:layout_toEndOf="@+id/from_dropdown_list"
-        android:layout_marginBottom="49dp"/>
+  <Spinner
+    android:layout_width="141dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/to_dropdown_list"
+    android:layout_gravity="center_horizontal|bottom"
+    android:layout_alignParentBottom="true"
+    android:layout_toRightOf="@+id/from_dropdown_list"
+    android:layout_toEndOf="@+id/from_dropdown_list"
+    android:layout_marginBottom="49dp"/>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go"
-        android:id="@+id/button"
-        android:layout_gravity="right|bottom"
-        android:layout_alignTop="@+id/to_dropdown_list"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+  <Button
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Go"
+    android:id="@+id/button"
+    android:layout_gravity="right|bottom"
+    android:layout_alignTop="@+id/to_dropdown_list"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"/>
 
 
 </RelativeLayout>
