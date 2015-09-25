@@ -24,6 +24,8 @@ import in.antaragni.ant.fragments.EventFragment;
 import in.antaragni.ant.fragments.FoodFragment;
 import in.antaragni.ant.fragments.MapFragment;
 import in.antaragni.ant.fragments.ScheduleFragment;
+import in.antaragni.ant.fragments.AboutFragment;
+import in.antaragni.ant.fragments.FaqFragment;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity
   protected int MAP = 3;
   protected int FOOD = 4;
   protected int CONTACT = 5;
+  protected int ABOUT = 6;
+  protected int FAQ = 7;
   //save our header or result
   private Drawer result = null;
   private Fragment f;
@@ -61,7 +65,9 @@ public class MainActivity extends AppCompatActivity
         new PrimaryDrawerItem().withName(R.string.drawer_item_events).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(EVENTS),
         new PrimaryDrawerItem().withName(R.string.drawer_item_maps).withIcon(FontAwesome.Icon.faw_map_marker).withIdentifier(MAP),
         new PrimaryDrawerItem().withName(R.string.drawer_item_food).withIcon(FontAwesome.Icon.faw_cutlery).withIdentifier(FOOD),
-        new PrimaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_users).withIdentifier(CONTACT))
+        new PrimaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_users).withIdentifier(CONTACT),
+      new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(FontAwesome.Icon.faw_book).withIdentifier(ABOUT),
+      new PrimaryDrawerItem().withName(R.string.drawer_item_faq).withIcon(FontAwesome.Icon.faw_question).withIdentifier(FAQ))
       .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
       {
         @Override
@@ -101,6 +107,18 @@ public class MainActivity extends AppCompatActivity
               f = ContactFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
             }
+            else if (drawerItem.getIdentifier() == ABOUT)
+            {
+              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
+              f = AboutFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
+              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+            }
+            else if (drawerItem.getIdentifier() == FAQ)
+            {
+              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
+              f = FaqFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
+              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+            }
           }
           return false;
         }
@@ -137,9 +155,11 @@ public class MainActivity extends AppCompatActivity
   public void gcmregister()
   {
     pushClientManager = new GCMClientManager(this, PROJECT_NUMBER);
-    pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler() {
+    pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler()
+    {
       @Override
-      public void onSuccess(String registrationId, boolean isNewRegistration) {
+      public void onSuccess(String registrationId, boolean isNewRegistration)
+      {
         Toast.makeText(MainActivity.this, registrationId,
           Toast.LENGTH_SHORT).show();
         Log.wtf("gcm token", registrationId);
@@ -149,7 +169,8 @@ public class MainActivity extends AppCompatActivity
       }
 
       @Override
-      public void onFailure(String ex) {
+      public void onFailure(String ex)
+      {
         super.onFailure(ex);
         // If there is an error registering, don't just keep trying to register.
         // Require the user to click a button again, or perform
