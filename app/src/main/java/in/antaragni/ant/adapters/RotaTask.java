@@ -25,7 +25,8 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
+public class RotaTask extends AsyncTask<Void, Integer, Boolean>
+{
   private static final String TOAST_MSG = "Calculating";
   private static final String TOAST_ERR_MAJ = "Impossible to trace Itinerary";
 
@@ -35,9 +36,10 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
   private String editTo;
   private final ArrayList<LatLng> lstLatLng = new ArrayList<LatLng>();
 
-  public RotaTask(final Context context, final GoogleMap gMap, final String editFrom, final String editTo) {
+  public RotaTask(final Context context, final GoogleMap gMap, final String editFrom, final String editTo)
+  {
     this.context = context;
-    this.gMap= gMap;
+    this.gMap = gMap;
     this.editFrom = editFrom;
     this.editTo = editTo;
   }
@@ -46,7 +48,8 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
    * {@inheritDoc}
    */
   @Override
-  protected void onPreExecute() {
+  protected void onPreExecute()
+  {
     Toast.makeText(context, TOAST_MSG, Toast.LENGTH_LONG).show();
   }
 
@@ -54,8 +57,10 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
    * {@inheritDoc}
    */
   @Override
-  protected Boolean doInBackground(Void... params) {
-    try {
+  protected Boolean doInBackground(Void... params)
+  {
+    try
+    {
       final StringBuilder url = new StringBuilder("http://maps.googleapis.com/maps/api/directions/xml?sensor=false&language=pt");
       url.append("&origin=");
       url.append(editFrom.replace(' ', '+'));
@@ -73,7 +78,8 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
       document.getDocumentElement().normalize();
 
       final String status = document.getElementsByTagName("status").item(0).getTextContent();
-      if(!"OK".equals(status)) {
+      if (!"OK".equals(status))
+      {
         return false;
       }
 
@@ -81,30 +87,35 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
       final NodeList nodeListStep = elementLeg.getElementsByTagName("step");
       final int length = nodeListStep.getLength();
 
-      for(int i=0; i<length; i++) {
+      for (int i = 0; i < length; i++)
+      {
         final Node nodeStep = nodeListStep.item(i);
 
-        if(nodeStep.getNodeType() == Node.ELEMENT_NODE) {
+        if (nodeStep.getNodeType() == Node.ELEMENT_NODE)
+        {
           final Element elementStep = (Element) nodeStep;
           decodePolylines(elementStep.getElementsByTagName("points").item(0).getTextContent());
         }
       }
 
       return true;
-    }
-    catch(final Exception e) {
+    } catch (final Exception e)
+    {
       return false;
     }
   }
 
-  private void decodePolylines(final String encodedPoints) {
+  private void decodePolylines(final String encodedPoints)
+  {
     int index = 0;
     int lat = 0, lng = 0;
 
-    while (index < encodedPoints.length()) {
+    while (index < encodedPoints.length())
+    {
       int b, shift = 0, result = 0;
 
-      do {
+      do
+      {
         b = encodedPoints.charAt(index++) - 63;
         result |= (b & 0x1f) << shift;
         shift += 5;
@@ -115,7 +126,8 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
       shift = 0;
       result = 0;
 
-      do {
+      do
+      {
         b = encodedPoints.charAt(index++) - 63;
         result |= (b & 0x1f) << shift;
         shift += 5;
@@ -124,7 +136,7 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
       int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
       lng += dlng;
 
-      lstLatLng.add(new LatLng((double)lat/1E5, (double)lng/1E5));
+      lstLatLng.add(new LatLng((double) lat / 1E5, (double) lng / 1E5));
     }
   }
 
@@ -132,15 +144,18 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
    * {@inheritDoc}
    */
   @Override
-  protected void onPostExecute(final Boolean result) {
-    if(!result) {
+  protected void onPostExecute(final Boolean result)
+  {
+    if (!result)
+    {
       Toast.makeText(context, TOAST_ERR_MAJ, Toast.LENGTH_SHORT).show();
-    }
-    else {
+    } else
+    {
       final PolylineOptions polylines = new PolylineOptions();
       polylines.color(Color.BLUE);
 
-      for(final LatLng latLng : lstLatLng) {
+      for (final LatLng latLng : lstLatLng)
+      {
         polylines.add(latLng);
       }
 
@@ -149,7 +164,7 @@ public class RotaTask  extends AsyncTask<Void, Integer, Boolean> {
       markerA.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
       final MarkerOptions markerB = new MarkerOptions();
-      markerB.position(lstLatLng.get(lstLatLng.size()-1));
+      markerB.position(lstLatLng.get(lstLatLng.size() - 1));
       markerB.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
       gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lstLatLng.get(0), 17));

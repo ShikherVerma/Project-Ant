@@ -1,6 +1,7 @@
 package in.antaragni.ant.fragments.inner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationA
 
 import java.util.ArrayList;
 
+import in.antaragni.ant.EventDetailActivity;
 import in.antaragni.ant.R;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
@@ -106,6 +108,11 @@ public class CategoryViewFragment extends Fragment
         public void onClick(Card card, View view)
         {
           Toast.makeText(getContext(), "Click Listener card=" + mTitleHeader, Toast.LENGTH_SHORT).show();
+          Context context = view.getContext();
+          Intent intent = new Intent(context, EventDetailActivity.class);
+          intent.putExtra(EventDetailActivity.EXTRA_NAME, mTitleHeader);
+          context.startActivity(intent);
+
         }
       });
     }
@@ -128,6 +135,10 @@ public class CategoryViewFragment extends Fragment
           public void onClick(View view)
           {
             Toast.makeText(getContext(), "Click Listener card category", Toast.LENGTH_SHORT).show();
+            Context context = view.getContext();
+            Intent intent = new Intent(context, EventDetailActivity.class);
+            intent.putExtra(EventDetailActivity.EXTRA_NAME, mTitleHeader);
+            context.startActivity(intent);
           }
         });
       }
@@ -141,6 +152,10 @@ public class CategoryViewFragment extends Fragment
           public void onClick(View view)
           {
             Toast.makeText(getContext(), "Click Listener card venue", Toast.LENGTH_SHORT).show();
+            Context context = view.getContext();
+            Intent intent = new Intent(context, EventDetailActivity.class);
+            intent.putExtra(EventDetailActivity.EXTRA_NAME, mTitleHeader);
+            context.startActivity(intent);
           }
         });
       }
@@ -154,6 +169,10 @@ public class CategoryViewFragment extends Fragment
           public void onClick(View view)
           {
             Toast.makeText(getContext(), "Click Listener card time", Toast.LENGTH_SHORT).show();
+            Context context = view.getContext();
+            Intent intent = new Intent(context, EventDetailActivity.class);
+            intent.putExtra(EventDetailActivity.EXTRA_NAME, mTitleHeader);
+            context.startActivity(intent);
           }
         });
 
