@@ -6,8 +6,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity
   //save our header or result
   private Drawer result = null;
   private Fragment f;
+  private GCMClientManager pushClientManager;
+  String PROJECT_NUMBER = "138444406408";
 
 
   @Override
@@ -126,6 +130,32 @@ public class MainActivity extends AppCompatActivity
 
     //react on the keyboard
     result.keyboardSupportEnabled(this, true);
+
+    gcmregister();
+  }
+
+  public void gcmregister()
+  {
+    pushClientManager = new GCMClientManager(this, PROJECT_NUMBER);
+    pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler() {
+      @Override
+      public void onSuccess(String registrationId, boolean isNewRegistration) {
+        Toast.makeText(MainActivity.this, registrationId,
+          Toast.LENGTH_SHORT).show();
+        Log.wtf("gcm token", registrationId);
+        // SEND async device registration to your back-end server
+        // linking user with device registration id
+        // POST https://my-back-end.com/devices/register?user_id=123&device_id=abc
+      }
+
+      @Override
+      public void onFailure(String ex) {
+        super.onFailure(ex);
+        // If there is an error registering, don't just keep trying to register.
+        // Require the user to click a button again, or perform
+        // exponential back-off when retrying.
+      }
+    });
 
   }
 

@@ -8,6 +8,16 @@
   <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+  <!--for gcm -->
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+  <permission android:name="in.antaragni.ant.permission.C2D_MESSAGE"
+              android:protectionLevel="signature" />
+  <uses-permission android:name="in.antaragni.ant.permission.C2D_MESSAGE" />
+
   <!--
 The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
      Google Maps Android API v2, but are recommended.
@@ -44,6 +54,25 @@ The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
       android:name=".EventDetailActivity"
       android:label="@string/title_activity_event_detail">
     </activity>
+
+    <receiver
+      android:name="com.google.android.gms.gcm.GcmReceiver"
+      android:exported="true"
+      android:permission="com.google.android.c2dm.permission.SEND" >
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <category android:name="in.antaragni.ant" />
+      </intent-filter>
+    </receiver>
+
+    <service
+      android:name=".GcmMessageHandler"
+      android:exported="false" >
+      <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+      </intent-filter>
+    </service>
+
   </application>
 
 </manifest>
