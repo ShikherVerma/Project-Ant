@@ -4,7 +4,7 @@
     <item name="colorPrimary">#212121</item>
     <item name="colorPrimaryDark">#212121</item>
     <item name="android:textColor">@color/md_black_900</item>
-    <item name="colorAccent">#02A8F3</item>
+    <item name="colorAccent">@color/md_yellow_400</item>
     <!-- MaterialDrawer specific values -->
     <item name="material_drawer_selected_text">@color/md_yellow_400</item>
     <item name="material_drawer_header_selection_text">
@@ -50,4 +50,5 @@
     <item name="android:paddingTop">@dimen/carddemo_keyline_1_minus_8dp</item>
     <item name="android:paddingBottom">@dimen/carddemo_keyline_1_minus_8dp</item>
   </style>
+
 </resources>

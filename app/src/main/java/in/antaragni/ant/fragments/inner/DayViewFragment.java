@@ -1,9 +1,9 @@
 package in.antaragni.ant.fragments.inner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import in.antaragni.ant.EventDetailActivity;
 import in.antaragni.ant.R;
 import in.antaragni.ant.datahandler.DatabaseAccess;
 import in.antaragni.ant.datamodels.Event;
@@ -113,6 +114,10 @@ public class DayViewFragment extends Fragment
         public void onClick(Card card, View view)
         {
           Toast.makeText(getContext(), "Click Listener card=" + event.getName(), Toast.LENGTH_SHORT).show();
+          Context context = view.getContext();
+          Intent intent = new Intent(context, EventDetailActivity.class);
+          intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
+          context.startActivity(intent);
         }
       });
     }
@@ -129,10 +134,16 @@ public class DayViewFragment extends Fragment
       if (categoryTitle != null)
       {
         categoryTitle.setText(event.getCategory());
-        categoryTitle.setOnClickListener(new View.OnClickListener() {
+        categoryTitle.setOnClickListener(new View.OnClickListener()
+        {
           @Override
-          public void onClick(View view) {
+          public void onClick(View view)
+          {
             Toast.makeText(getContext(), "Click Listener card category", Toast.LENGTH_SHORT).show();
+            Context context = view.getContext();
+            Intent intent = new Intent(context, EventDetailActivity.class);
+            intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
+            context.startActivity(intent);
           }
         });
       }
@@ -140,10 +151,16 @@ public class DayViewFragment extends Fragment
       if (venueTitle != null)
       {
         venueTitle.setText(event.getVenue().getLocation());
-        venueTitle.setOnClickListener(new View.OnClickListener() {
+        venueTitle.setOnClickListener(new View.OnClickListener()
+        {
           @Override
-          public void onClick(View view) {
+          public void onClick(View view)
+          {
             Toast.makeText(getContext(), "Click Listener card venue", Toast.LENGTH_SHORT).show();
+            Context context = view.getContext();
+            Intent intent = new Intent(context, EventDetailActivity.class);
+            intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
+            context.startActivity(intent);
           }
         });
       }
@@ -153,11 +170,17 @@ public class DayViewFragment extends Fragment
         timeTitle.setText(event.getStart_time().get(Calendar.HOUR_OF_DAY) + ":" +
           event.getStart_time().get(Calendar.MINUTE) + "-" +
           event.getEnd_time().get(Calendar.HOUR_OF_DAY) + ":" +
-        event.getEnd_time().get(Calendar.MINUTE));
-        timeTitle.setOnClickListener(new View.OnClickListener() {
+          event.getEnd_time().get(Calendar.MINUTE));
+        timeTitle.setOnClickListener(new View.OnClickListener()
+        {
           @Override
-          public void onClick(View view) {
+          public void onClick(View view)
+          {
             Toast.makeText(getContext(), "Click Listener card time", Toast.LENGTH_SHORT).show();
+            Context context = view.getContext();
+            Intent intent = new Intent(context, EventDetailActivity.class);
+            intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
+            context.startActivity(intent);
           }
         });
 
