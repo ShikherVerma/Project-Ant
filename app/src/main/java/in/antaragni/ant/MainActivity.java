@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
   private Drawer result = null;
   private Fragment f;
 
+
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {

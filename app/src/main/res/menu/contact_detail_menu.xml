@@ -1,0 +1,4 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/call" android:title="Call" android:icon="@drawable/ic_call_black_24dp"/>
+    <item android:id="@+id/save" android:title="Save to contacts" android:icon="@drawable/ic_contact_phone_black_24dp"/>
+</menu>
