@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -141,4 +142,18 @@ public class DatabaseAccess
     cursor.close();
     return list;
   }
+
+  public void updateinfo(String event_name,int time)
+  {
+    String query = "UPDATE eventdetails SET start_time=" + time + " WHERE name='" + event_name + "';";
+    database.execSQL(query);
+  }
+
+  public void updateinfo(String event_name,String venue)
+  {
+    String query = "UPDATE eventdetails SET venue='" + venue + "' WHERE name='" + event_name + "';";
+    database.execSQL(query);
+  }
+
+
 }
