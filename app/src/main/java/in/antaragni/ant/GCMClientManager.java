@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
@@ -47,7 +48,6 @@ public class GCMClientManager {
   public void registerIfNeeded(final RegistrationCompletedHandler handler) {
     if (checkPlayServices()) {
       regid = getRegistrationId(getContext());
-
       if (regid.isEmpty()) {
         registerInBackground(handler);
       } else { // got id from cache
@@ -77,6 +77,11 @@ public class GCMClientManager {
           regid = instanceID.getToken(projectNumber, GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
           Log.i(TAG, regid);
 
+          if (regid != null)
+          {
+            GcmPubSub pubSub = GcmPubSub.getInstance(getContext());
+            pubSub.subscribe(regid, "/topics/antaragni", null);
+          }
           // Persist the regID - no need to register again.
           storeRegistrationId(getContext(), regid);
 
@@ -106,7 +111,7 @@ public class GCMClientManager {
    * @return registration ID, or empty string if there is no existing
    *         registration ID.
    */
-  private String getRegistrationId(Context context) {
+  public String getRegistrationId(Context context) {
     final SharedPreferences prefs = getGCMPreferences(context);
     String registrationId = prefs.getString(PROPERTY_REG_ID, "");
     if (registrationId.isEmpty()) {
