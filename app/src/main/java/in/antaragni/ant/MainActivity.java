@@ -6,10 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
@@ -18,6 +16,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.KeyboardUtil;
+
 
 import in.antaragni.ant.fragments.ContactFragment;
 import in.antaragni.ant.fragments.EventFragment;
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity
   private Fragment f;
   private GCMClientManager pushClientManager;
   String PROJECT_NUMBER = "138444406408";
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -152,17 +150,20 @@ public class MainActivity extends AppCompatActivity
     gcmregister();
   }
 
+
+
+
+
   public void gcmregister()
   {
     pushClientManager = new GCMClientManager(this, PROJECT_NUMBER);
     pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler()
     {
+
       @Override
       public void onSuccess(String registrationId, boolean isNewRegistration)
       {
-        Toast.makeText(MainActivity.this, registrationId,
-          Toast.LENGTH_SHORT).show();
-        Log.wtf("gcm token", registrationId);
+
         // SEND async device registration to your back-end server
         // linking user with device registration id
         // POST https://my-back-end.com/devices/register?user_id=123&device_id=abc
@@ -200,6 +201,9 @@ public class MainActivity extends AppCompatActivity
     if (result != null && result.isDrawerOpen())
     {
       result.closeDrawer();
+    }
+    else
+    {
       super.onBackPressed();
     }
   }
