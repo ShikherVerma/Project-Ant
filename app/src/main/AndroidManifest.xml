@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="in.antaragni.ant"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+  package="in.antaragni.ant"
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -10,22 +11,26 @@
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
   <!--for gcm -->
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-  <permission android:name="in.antaragni.ant.permission.C2D_MESSAGE"
-              android:protectionLevel="signature" />
-  <uses-permission android:name="in.antaragni.ant.permission.C2D_MESSAGE" />
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
 
-  <!--
-The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-     Google Maps Android API v2, but are recommended.
-  -->
+  <permission
+    android:name="in.antaragni.ant.permission.C2D_MESSAGE"
+    android:protectionLevel="signature"/>
+  <uses-permission android:name="in.antaragni.ant.permission.C2D_MESSAGE"/>
+
+  <!--The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+     Google Maps Android API v2, but are recommended.-->
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+  <!-- for calendar reminder -->
+  <uses-permission android:name="android.permission.READ_CALENDAR"/>
+  <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
 
+  <!-- for calling -->
   <uses-permission android:name="android.permission.CALL_PHONE"/>
 
   <application
@@ -58,18 +63,18 @@ The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
     <receiver
       android:name="com.google.android.gms.gcm.GcmReceiver"
       android:exported="true"
-      android:permission="com.google.android.c2dm.permission.SEND" >
+      android:permission="com.google.android.c2dm.permission.SEND">
       <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-        <category android:name="in.antaragni.ant" />
+        <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+        <category android:name="in.antaragni.ant"/>
       </intent-filter>
     </receiver>
 
     <service
       android:name=".GcmMessageHandler"
-      android:exported="false" >
+      android:exported="false">
       <intent-filter>
-        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
       </intent-filter>
     </service>
 
