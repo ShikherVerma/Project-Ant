@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
             } else if (drawerItem.getIdentifier() == MAP)
             {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
-              f = MapFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
+              f = MapFragment.newInstance("CCD");
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
             } else if (drawerItem.getIdentifier() == FOOD)
             {
@@ -207,5 +207,6 @@ public class MainActivity extends AppCompatActivity
       super.onBackPressed();
     }
   }
+
 
 }
