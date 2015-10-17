@@ -18,6 +18,7 @@
                 android:layout_alignParentBottom="true"
                 android:background="@color/md_white_1000"
                 android:padding="4sp"
+                android:elevation="2sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

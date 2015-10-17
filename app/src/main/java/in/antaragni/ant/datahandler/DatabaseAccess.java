@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -80,6 +79,20 @@ public class DatabaseAccess
     return list;
   }
 
+  public Event getParticularEvent(String name)
+  {
+    String query = "SELECT * FROM eventdetails WHERE name='" + name + "';";
+    Cursor cursor = database.rawQuery(query, null);
+    cursor.moveToFirst();
+    int day = Integer.parseInt(cursor.getString(6));
+    GregorianCalendar start_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(5) / 100, cursor.getInt(5) % 100);
+    GregorianCalendar end_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(4) / 100, cursor.getInt(4) % 100);
+    Event event = new Event(cursor.getString(7), cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(1)));
+    cursor.moveToNext();
+    cursor.close();
+    return event;
+  }
+
   public Venue getVenue(String loc)
   {
     String query = "SELECT * FROM venue WHERE location='" + loc + "';";
@@ -143,13 +156,13 @@ public class DatabaseAccess
     return list;
   }
 
-  public void updateinfo(String event_name,int time)
+  public void updateinfo(String event_name, int time)
   {
     String query = "UPDATE eventdetails SET start_time=" + time + " WHERE name='" + event_name + "';";
     database.execSQL(query);
   }
 
-  public void updateinfo(String event_name,String venue)
+  public void updateinfo(String event_name, String venue)
   {
     String query = "UPDATE eventdetails SET venue='" + venue + "' WHERE name='" + event_name + "';";
     database.execSQL(query);
