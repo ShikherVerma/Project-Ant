@@ -299,10 +299,17 @@ public class DayViewFragment extends Fragment
 
       if (timeTitle != null)
       {
-        timeTitle.setText(event.getStart_time().get(Calendar.HOUR_OF_DAY) + ":" +
-          event.getStart_time().get(Calendar.MINUTE) + "-" +
-          event.getEnd_time().get(Calendar.HOUR_OF_DAY) + ":" +
-          event.getEnd_time().get(Calendar.MINUTE));
+        int shour = event.getStart_time().get(Calendar.HOUR_OF_DAY);
+        String starttime;
+        if (shour > 12)
+        {
+          shour = shour - 12;
+          starttime = shour + ":" + event.getStart_time().get(Calendar.MINUTE) + " PM";
+        } else
+        {
+          starttime = shour + ":" + event.getStart_time().get(Calendar.MINUTE) + " AM";
+        }
+        timeTitle.setText(starttime);
         timeTitle.setOnClickListener(new View.OnClickListener()
         {
           @Override

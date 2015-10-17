@@ -150,9 +150,10 @@ public class MainActivity extends AppCompatActivity
     gcmregister();
   }
 
-
-
-
+  public void showSnackBar(CharSequence text, int length)
+  {
+    Snackbar.make(findViewById(R.id.main_screen), text, length).setAction("Action", null).show();
+  }
 
   public void gcmregister()
   {

@@ -19,4 +19,11 @@
   <!--used in event details activity-->
   <dimen name="detail_backdrop_height">256dp</dimen>
   <dimen name="fab_margin">16dp</dimen>
+
+  <!-- dimensions for event details screen -->
+  <dimen name="list_top_margin">15sp</dimen>
+  <dimen name="list_bottom_margin">15sp</dimen>
+  <dimen name="list_left_margin">25sp</dimen>
+  <dimen name="list_right_margin">25sp</dimen>
+  <dimen name="list_item_font_size">17sp</dimen>
 </resources>
