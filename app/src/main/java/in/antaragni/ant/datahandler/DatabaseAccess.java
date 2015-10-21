@@ -137,6 +137,7 @@ public class DatabaseAccess
     return list;
   }
 
+
   public List<Contact> getContact()
   {
     String query = "SELECT * FROM contacts;";
