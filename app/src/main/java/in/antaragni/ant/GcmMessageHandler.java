@@ -22,13 +22,8 @@ public class GcmMessageHandler extends GcmListenerService {
 
   @Override
   public void onMessageReceived(String from, Bundle data) {
-    for (String key : data.keySet()) {
-      Object value = data.get(key);
-      Log.wtf("qwe", String.format("%s %s (%s)", key,
-        value.toString(), value.getClass().getName()));
-    }
     String type = data.getString("type");
-    String title = data.getString("title");
+    String title = "Antaragni";//data.getString("title");
     String message = "";
     String event_name ;
     databaseAccess = DatabaseAccess.getInstance(this);
@@ -36,14 +31,14 @@ public class GcmMessageHandler extends GcmListenerService {
     if(type.equals("eventdetailchange"))
     {
       event_name = data.getString("eventname");
-      String start_time = data.getString("start_time");
-      String end_time = data.getString("end_time");
+      String time = data.getString("time");
       String venue = data.getString("venue");
-      message = "Change in details of " + message.concat(event_name);
+      message = message.concat(event_name);
 
-      if (!start_time.isEmpty())
+      if (!time.isEmpty())
       {
-        databaseAccess.updateinfo(event_name, Integer.parseInt(start_time),Integer.parseInt(end_time));
+        databaseAccess.updateinfo(event_name, Integer.parseInt(time));
+        message = message.concat(" " + time);
       }
       if (!venue.isEmpty())
       {
@@ -95,4 +90,5 @@ public class GcmMessageHandler extends GcmListenerService {
 
     mNotificationManager.notify(m, mBuilder.build());
   }
+ }
 }
