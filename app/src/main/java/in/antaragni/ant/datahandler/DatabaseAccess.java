@@ -124,6 +124,7 @@ public class DatabaseAccess
     return list;
   }
 
+
   public List<Contact> getContact()
   {
     String query = "SELECT * FROM contacts;";
@@ -156,7 +157,33 @@ public class DatabaseAccess
     return list;
   }
 
-  public void updateinfo(String event_name, int time)
+  public String getResult(String eventname)
+  {
+    String query = "SELECT * FROM eventdetails WHERE name='" + eventname + "';";
+    Cursor cursor = database.rawQuery(query, null);
+    cursor.moveToFirst();
+    String result = cursor.getString(8);
+    cursor.close();
+    return result;
+  }
+
+  public List<String> getnotification()
+  {
+    String query = "SELECT * FROM notification ORDER BY id DESC;";
+    List<String> list = new ArrayList<>();
+    Cursor cursor = database.rawQuery(query, null);
+    cursor.moveToFirst();
+    while (!cursor.isAfterLast())
+    {
+      String notify = cursor.getString(1);
+      list.add(notify);
+      cursor.moveToNext();
+    }
+    cursor.close();
+    return list;
+  }
+
+  public void updateinfo(String event_name,int time)
   {
     String query = "UPDATE eventdetails SET start_time=" + time + " WHERE name='" + event_name + "';";
     database.execSQL(query);
@@ -168,5 +195,16 @@ public class DatabaseAccess
     database.execSQL(query);
   }
 
+  public void updateresult(String event_name,String result)
+  {
+    String query = "UPDATE eventdetails SET result='" + result + "' WHERE name='" + event_name + "';";
+    database.execSQL(query);
+  }
+
+  public void addnotification(String notification, String type)
+  {
+    String query = "INSERT INTO notification (notification,type) VALUES ('" + notification +  "','" + type + "');";
+    database.execSQL(query);
+  }
 
 }
