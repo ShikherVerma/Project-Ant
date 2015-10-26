@@ -183,10 +183,12 @@ public class DatabaseAccess
     return list;
   }
 
-  public void updateinfo(String event_name,int time)
+  public void updateinfo(String event_name,int star_time,int end_time)
   {
-    String query = "UPDATE eventdetails SET start_time=" + time + " WHERE name='" + event_name + "';";
-    database.execSQL(query);
+    String query1 = "UPDATE eventdetails SET start_time=" + star_time + " WHERE name='" + event_name + "';";
+    database.execSQL(query1);
+    String query2 = "UPDATE eventdetails SET end_time=" + end_time + " WHERE name='" + event_name + "';";
+    database.execSQL(query2);
   }
 
   public void updateinfo(String event_name, String venue)

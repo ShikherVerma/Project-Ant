@@ -27,7 +27,7 @@ public class GcmMessageHandler extends GcmListenerService {
   @Override
   public void onMessageReceived(String from, Bundle data) {
     String type = data.getString("type");
-    String title = "Antaragni";//data.getString("title");
+    String title = data.getString("title");
     String message = "";
     String event_name ;
     databaseAccess = DatabaseAccess.getInstance(this);
@@ -35,14 +35,15 @@ public class GcmMessageHandler extends GcmListenerService {
     if(type.equals("eventdetailchange"))
     {
       event_name = data.getString("eventname");
-      String time = data.getString("time");
+      String start_time = data.getString("start_time");
+      String end_time = data.getString("end_time");
       String venue = data.getString("venue");
       message = message.concat(event_name);
 
-      if (!time.isEmpty())
+      if (!start_time.isEmpty())
       {
-        databaseAccess.updateinfo(event_name, Integer.parseInt(time));
-        message = message.concat(" " + time);
+        databaseAccess.updateinfo(event_name, Integer.parseInt(start_time),Integer.parseInt(end_time));
+        message = message.concat(" " + start_time + "-" + end_time);
       }
       if (!venue.isEmpty())
       {
