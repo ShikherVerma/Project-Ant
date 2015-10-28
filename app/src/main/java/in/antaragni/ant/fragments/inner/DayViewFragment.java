@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import in.antaragni.ant.EventDetailActivity;
+import in.antaragni.ant.MainActivity;
 import in.antaragni.ant.R;
 import in.antaragni.ant.datahandler.DatabaseAccess;
 import in.antaragni.ant.datamodels.Event;
@@ -200,6 +201,7 @@ public class DayViewFragment extends Fragment
               }
               break;
             case MAP:
+              ((MainActivity)getActivity()).startMap(event.getVenue().getLocation());
               break;
           }
         }
