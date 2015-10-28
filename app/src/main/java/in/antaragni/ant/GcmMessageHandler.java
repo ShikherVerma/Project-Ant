@@ -26,7 +26,12 @@ public class GcmMessageHandler extends GcmListenerService {
 
   @Override
   public void onMessageReceived(String from, Bundle data) {
-    String type = data.getString("type");
+    for (String key : data.keySet()) {
+      Object value = data.get(key);
+      Log.wtf("qwe", String.format("%s %s (%s)", key,
+        value.toString(), value.getClass().getName()));
+    }
+    /*String type = data.getString("type");
     String title = data.getString("title");
     String message = "";
     String event_name ;
@@ -63,7 +68,7 @@ public class GcmMessageHandler extends GcmListenerService {
       createNotification(title, message, "notify", type);
     }
     databaseAccess.addnotification(message,type);
-    databaseAccess.close();
+    databaseAccess.close();*/
   }
 
   // Creates notification based on title and body received
