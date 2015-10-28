@@ -1,11 +1,12 @@
 package in.antaragni.ant;
 
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -17,14 +18,12 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.KeyboardUtil;
 
-
+import in.antaragni.ant.fragments.AboutFragment;
 import in.antaragni.ant.fragments.ContactFragment;
 import in.antaragni.ant.fragments.EventFragment;
 import in.antaragni.ant.fragments.FoodFragment;
 import in.antaragni.ant.fragments.MapFragment;
 import in.antaragni.ant.fragments.ScheduleFragment;
-import in.antaragni.ant.fragments.AboutFragment;
-import in.antaragni.ant.fragments.FaqFragment;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -38,8 +37,10 @@ public class MainActivity extends AppCompatActivity
   //save our header or result
   private Drawer result = null;
   private Fragment f;
+  private Toolbar mtoolbar;
   private GCMClientManager pushClientManager;
   String PROJECT_NUMBER = "138444406408";
+  public static String EXTRA_ACTION = "action";
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -48,14 +49,14 @@ public class MainActivity extends AppCompatActivity
     setContentView(R.layout.activity_main);
 
     // Handle Toolbar
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
+    mtoolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(mtoolbar);
 
     //Create the drawer
     result = new DrawerBuilder(this)
       //this layout have to contain child layouts
       .withRootView(R.id.drawer_container)
-      .withToolbar(toolbar)
+      .withToolbar(mtoolbar)
       .withTranslucentStatusBar(false)
       .withActionBarDrawerToggleAnimated(true)
       .addDrawerItems(
@@ -64,8 +65,7 @@ public class MainActivity extends AppCompatActivity
         new PrimaryDrawerItem().withName(R.string.drawer_item_maps).withIcon(FontAwesome.Icon.faw_map_marker).withIdentifier(MAP),
         new PrimaryDrawerItem().withName(R.string.drawer_item_food).withIcon(FontAwesome.Icon.faw_cutlery).withIdentifier(FOOD),
         new PrimaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_users).withIdentifier(CONTACT),
-      new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(FontAwesome.Icon.faw_book).withIdentifier(ABOUT),
-      new PrimaryDrawerItem().withName(R.string.drawer_item_faq).withIcon(FontAwesome.Icon.faw_question).withIdentifier(FAQ))
+        new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(FontAwesome.Icon.faw_book).withIdentifier(ABOUT))
       .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
       {
         @Override
@@ -104,17 +104,10 @@ public class MainActivity extends AppCompatActivity
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = ContactFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-            }
-            else if (drawerItem.getIdentifier() == ABOUT)
+            } else if (drawerItem.getIdentifier() == ABOUT)
             {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = AboutFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
-              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-            }
-            else if (drawerItem.getIdentifier() == FAQ)
-            {
-              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
-              f = FaqFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
             }
           }
@@ -148,6 +141,38 @@ public class MainActivity extends AppCompatActivity
     result.keyboardSupportEnabled(this, true);
 
     gcmregister();
+
+    Intent intent = getIntent();
+    String VenueName = intent.getStringExtra(EXTRA_ACTION);
+    if (VenueName != null)
+      startMap(VenueName,true);
+  }
+
+  public void startMap(String v, boolean backarrow)
+  {
+    if (backarrow)//if backarrow is true then show back arrow
+    {
+      result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+      getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    startMap(v);
+    if (backarrow)//if back arrow then disable drawer
+    mtoolbar.setNavigationOnClickListener(new View.OnClickListener()
+    {
+      @Override
+      public void onClick(View view)
+      {
+        finish();
+      }
+    });
+  }
+
+  public void startMap(String v)
+  {
+    result.setSelection(MAP);
+    getSupportActionBar().setTitle("Map");
+    f = MapFragment.newInstance(v);
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
   }
 
   public void showSnackBar(CharSequence text, int length)
@@ -202,12 +227,9 @@ public class MainActivity extends AppCompatActivity
     if (result != null && result.isDrawerOpen())
     {
       result.closeDrawer();
-    }
-    else
+    } else
     {
       super.onBackPressed();
     }
   }
-
-
 }
