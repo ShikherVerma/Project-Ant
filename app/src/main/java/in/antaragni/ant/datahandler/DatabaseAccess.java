@@ -14,7 +14,6 @@ import java.util.List;
 
 import in.antaragni.ant.datamodels.Contact;
 import in.antaragni.ant.datamodels.Event;
-import in.antaragni.ant.datamodels.Food;
 import in.antaragni.ant.datamodels.Venue;
 
 public class DatabaseAccess
@@ -51,9 +50,10 @@ public class DatabaseAccess
     }
   }
 
-  private Contact getContact(String eventname)
+  private Contact getContact(String category)
   {
-    String query = "SELECT * FROM contacts WHERE eventname='" + eventname + "';";
+    Log.wtf("qwe","getcontact");
+    String query = "SELECT * FROM contacts WHERE category='" + category + "';";
     Cursor cursor = database.rawQuery(query, null);
     cursor.moveToFirst();
     Contact contact = new Contact(cursor.getString(1), cursor.getString(2), cursor.getString(4), cursor.getString(3));
@@ -65,13 +65,18 @@ public class DatabaseAccess
   {
     String query = "SELECT * FROM eventdetails WHERE day=" + String.valueOf(day) + " ORDER BY start_time;";
     List<Event> list = new ArrayList<>();
+    Log.wtf("qwe", "geteventstart");
     Cursor cursor = database.rawQuery(query, null);
     cursor.moveToFirst();
+    int i=0;
     while (!cursor.isAfterLast())
     {
+      i = i + 1;
+      Log.wtf("qwe",cursor.getString(1));
       GregorianCalendar start_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(5) / 100, cursor.getInt(5) % 100);
       GregorianCalendar end_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(4) / 100, cursor.getInt(4) % 100);
-      Event event = new Event(cursor.getString(7), cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(1)));
+      Event event = new Event(cursor.getString(7), cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact("Synchronicity"));
+      Log.wtf("qwe","addevent");
       list.add(event);
       cursor.moveToNext();
     }
@@ -95,6 +100,13 @@ public class DatabaseAccess
 
   public Venue getVenue(String loc)
   {
+    Log.wtf("qwe", "getvenue");
+    if(loc.contains("LHC")){
+      loc = "LHC";
+    }
+    if(loc.contains("Yoga Room")){
+      loc = "Yoga Room";
+    }
     String query = "SELECT * FROM venue WHERE location='" + loc + "';";
     Cursor cursor = database.rawQuery(query, null);
     cursor.moveToFirst();
@@ -116,7 +128,7 @@ public class DatabaseAccess
       day = cursor.getInt(6);
       GregorianCalendar start_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(5) / 100, cursor.getInt(5) % 100);
       GregorianCalendar end_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(4) / 100, cursor.getInt(4) % 100);
-      Event event = new Event(category, cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(1)));
+      Event event = new Event(category, cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(7)));
       list.add(event);
       cursor.moveToNext();
     }
@@ -141,21 +153,6 @@ public class DatabaseAccess
     return list;
   }
 
-  public List<Food> getFood()
-  {
-    String query = "SELECT * FROM food_courts;";
-    List<Food> list = new ArrayList<>();
-    Cursor cursor = database.rawQuery(query, null);
-    cursor.moveToFirst();
-    while (!cursor.isAfterLast())
-    {
-      Food food = new Food(cursor.getString(1), getVenue(cursor.getString(2)));
-      list.add(food);
-      cursor.moveToNext();
-    }
-    cursor.close();
-    return list;
-  }
 
   public String getResult(String eventname)
   {
@@ -183,10 +180,12 @@ public class DatabaseAccess
     return list;
   }
 
-  public void updateinfo(String event_name,int time)
+  public void updateinfo(String event_name,int star_time,int end_time)
   {
-    String query = "UPDATE eventdetails SET start_time=" + time + " WHERE name='" + event_name + "';";
-    database.execSQL(query);
+    String query1 = "UPDATE eventdetails SET start_time=" + star_time + " WHERE name='" + event_name + "';";
+    database.execSQL(query1);
+    String query2 = "UPDATE eventdetails SET end_time=" + end_time + " WHERE name='" + event_name + "';";
+    database.execSQL(query2);
   }
 
   public void updateinfo(String event_name, String venue)
