@@ -2,9 +2,17 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="in.antaragni.ant.MainActivity">
+
   <item
-    android:id="@+id/action_settings"
+    android:id="@+id/contact_menu_settings"
     android:orderInCategory="100"
-    android:title="@string/action_settings"
-    app:showAsAction="never"/>
+    android:title="Contact"
+    app:showAsAction="always"/>
+
+  <item
+    android:id="@+id/map_menu_settings"
+    android:orderInCategory="101"
+    android:title="View Map"
+    app:showAsAction="always"/>
+
 </menu>

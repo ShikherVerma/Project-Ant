@@ -6,8 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.provider.ContactsContract;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -240,7 +242,40 @@ public class EventDetailActivity extends AppCompatActivity
     {
       case android.R.id.home:
         finish();
-        return true;
+        break;
+      case R.id.contact_menu_settings:
+        new BottomSheet.Builder(this).title("Options").sheet(R.menu.contact_detail_menu).listener(new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+              case R.id.call:
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                  intent.setPackage("com.android.server.telecom");
+                } else {
+                  intent.setPackage("com.android.phone");
+                }
+                intent.setData(Uri.parse("tel:" + mEvent.getContact().getNumber()));
+                startActivity(intent);
+                break;
+              case R.id.save:
+                Intent intent1 = new Intent(Intent.ACTION_INSERT);
+                intent1.setType(ContactsContract.Contacts.CONTENT_TYPE);
+                intent1.putExtra(ContactsContract.Intents.Insert.NAME, mEvent.getContact().getName());
+                intent1.putExtra(ContactsContract.Intents.Insert.PHONE, mEvent.getContact().getNumber());
+                if (intent1.resolveActivity(getPackageManager()) != null) {
+                  startActivity(intent1);
+                }
+                break;
+            }
+          }
+        }).show();
+        break;
+      case R.id.map_menu_settings:
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(MainActivity.EXTRA_ACTION, mEvent.getVenue().getLocation());
+        this.startActivity(intent);
+        break;
     }
     return super.onOptionsItemSelected(item);
   }
