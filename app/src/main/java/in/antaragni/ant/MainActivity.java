@@ -6,7 +6,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -21,19 +20,19 @@ import com.mikepenz.materialdrawer.util.KeyboardUtil;
 import in.antaragni.ant.fragments.AboutFragment;
 import in.antaragni.ant.fragments.ContactFragment;
 import in.antaragni.ant.fragments.EventFragment;
-import in.antaragni.ant.fragments.FoodFragment;
+import in.antaragni.ant.fragments.HomeFragment;
 import in.antaragni.ant.fragments.MapFragment;
 import in.antaragni.ant.fragments.ScheduleFragment;
 
 public class MainActivity extends AppCompatActivity
 {
-  protected int SCHEDULE = 1;
-  protected int EVENTS = 2;
-  protected int MAP = 3;
-  protected int FOOD = 4;
+  protected int HOME = 1;
+  protected int SCHEDULE = 2;
+  protected int EVENTS = 3;
+  protected int MAP = 4;
   protected int CONTACT = 5;
   protected int ABOUT = 6;
-  protected int FAQ = 7;
+
   //save our header or result
   private Drawer result = null;
   private Fragment f;
@@ -60,10 +59,10 @@ public class MainActivity extends AppCompatActivity
       .withTranslucentStatusBar(false)
       .withActionBarDrawerToggleAnimated(true)
       .addDrawerItems(
+        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(HOME),
         new PrimaryDrawerItem().withName(R.string.drawer_item_schedule).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(SCHEDULE),
         new PrimaryDrawerItem().withName(R.string.drawer_item_events).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(EVENTS),
         new PrimaryDrawerItem().withName(R.string.drawer_item_maps).withIcon(FontAwesome.Icon.faw_map_marker).withIdentifier(MAP),
-        new PrimaryDrawerItem().withName(R.string.drawer_item_food).withIcon(FontAwesome.Icon.faw_cutlery).withIdentifier(FOOD),
         new PrimaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_users).withIdentifier(CONTACT),
         new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(FontAwesome.Icon.faw_book).withIdentifier(ABOUT))
       .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
@@ -79,7 +78,12 @@ public class MainActivity extends AppCompatActivity
           //those items don't contain a drawerItem
           if (drawerItem != null)
           {
-            if (drawerItem.getIdentifier() == SCHEDULE)
+            if (drawerItem.getIdentifier() == HOME)
+            {
+              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
+              f = HomeFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
+              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+            } else if (drawerItem.getIdentifier() == SCHEDULE)
             {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = ScheduleFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
@@ -93,11 +97,6 @@ public class MainActivity extends AppCompatActivity
             {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = MapFragment.newInstance("CCD");
-              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
-            } else if (drawerItem.getIdentifier() == FOOD)
-            {
-              getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
-              f = FoodFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
             } else if (drawerItem.getIdentifier() == CONTACT)
             {
@@ -145,7 +144,7 @@ public class MainActivity extends AppCompatActivity
     Intent intent = getIntent();
     String VenueName = intent.getStringExtra(EXTRA_ACTION);
     if (VenueName != null)
-      startMap(VenueName,true);
+      startMap(VenueName, true);
   }
 
   public void startMap(String v, boolean backarrow)
@@ -157,14 +156,14 @@ public class MainActivity extends AppCompatActivity
     }
     startMap(v);
     if (backarrow)//if back arrow then disable drawer
-    mtoolbar.setNavigationOnClickListener(new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View view)
+      mtoolbar.setNavigationOnClickListener(new View.OnClickListener()
       {
-        finish();
-      }
-    });
+        @Override
+        public void onClick(View view)
+        {
+          finish();
+        }
+      });
   }
 
   public void startMap(String v)
