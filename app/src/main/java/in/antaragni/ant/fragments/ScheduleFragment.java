@@ -39,6 +39,7 @@ public class ScheduleFragment extends Fragment
     View result = inflater.inflate(R.layout.fragment_schedule, container, false);
     ViewPager pager = (ViewPager) result.findViewById(R.id.vpPager);
     pager.setAdapter(buildAdapter());
+    pager.setOffscreenPageLimit(3);
 
     // Give the TabLayout the ViewPager
     TabLayout tabLayout = (TabLayout) result.findViewById(R.id.sliding_tabs);
