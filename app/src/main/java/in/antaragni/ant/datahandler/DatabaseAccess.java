@@ -53,13 +53,18 @@ public class DatabaseAccess
 
   private Contact getContact(String category)
   {
-    Log.wtf("qwe","getcontact");
     String query = "SELECT * FROM contacts WHERE category='" + category + "';";
     Cursor cursor = database.rawQuery(query, null);
-    cursor.moveToFirst();
-    Contact contact = new Contact(cursor.getString(1), cursor.getString(2), cursor.getString(4), cursor.getString(3));
-    cursor.close();
-    return contact;
+    if (cursor.getCount() > 0){
+      cursor.moveToFirst();
+      Contact contact = new Contact(cursor.getString(1), cursor.getString(2), cursor.getString(4), cursor.getString(3));
+      cursor.close();
+      return contact;
+    }
+    else {
+      cursor.close();
+      return null;
+    }
   }
 
   public List<Event> getEventbyDay(int day)
@@ -69,15 +74,11 @@ public class DatabaseAccess
     Log.wtf("qwe", "geteventstart");
     Cursor cursor = database.rawQuery(query, null);
     cursor.moveToFirst();
-    int i=0;
     while (!cursor.isAfterLast())
     {
-      i = i + 1;
-      Log.wtf("qwe",cursor.getString(1));
       GregorianCalendar start_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(5) / 100, cursor.getInt(5) % 100);
       GregorianCalendar end_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(4) / 100, cursor.getInt(4) % 100);
-      Event event = new Event(cursor.getString(7), cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact("Synchronicity"));
-      Log.wtf("qwe","addevent");
+      Event event = new Event(cursor.getString(7), cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(7)));
       list.add(event);
       cursor.moveToNext();
     }
@@ -101,7 +102,6 @@ public class DatabaseAccess
 
   public Venue getVenue(String loc)
   {
-    Log.wtf("qwe", "getvenue");
     if(loc.contains("LHC")){
       loc = "LHC";
     }

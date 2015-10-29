@@ -23,7 +23,7 @@ public class GcmMessageHandler extends GcmListenerService {
   @Override
   public void onMessageReceived(String from, Bundle data) {
     String type = data.getString("type");
-    String title = "Antaragni";//data.getString("title");
+    String title = data.getString("title");
     String message = "";
     String event_name ;
     databaseAccess = DatabaseAccess.getInstance(this);
