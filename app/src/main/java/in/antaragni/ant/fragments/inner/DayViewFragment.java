@@ -203,7 +203,11 @@ public class DayViewFragment extends Fragment
               }
               break;
             case MAP:
-              ((MainActivity)getActivity()).startMap(event.getVenue().getLocation());
+              String v = event.getVenue().getLocation();
+              if (v != null)
+              ((MainActivity)getActivity()).startMap(v);
+              else
+                Toast.makeText(getContext(), "Error in venue", Toast.LENGTH_SHORT).show();
               /*
               Intent intent = new Intent(getContext(), MainActivity.class);
               intent.putExtra(MainActivity.EXTRA_ACTION, event.getVenue().getLocation());
