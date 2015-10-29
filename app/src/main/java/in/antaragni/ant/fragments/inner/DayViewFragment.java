@@ -126,6 +126,8 @@ public class DayViewFragment extends Fragment
     AnimationAdapter animCardArrayAdapter = new SwingBottomInAnimationAdapter(mCardArrayAdapter);
     animCardArrayAdapter.setAbsListView(listView);
     listView.setExternalAdapter(animCardArrayAdapter, mCardArrayAdapter);
+    if(mDay==4)
+    ((MainActivity)getActivity()).dismissloading();
     return view;
   }
 
@@ -302,14 +304,20 @@ public class DayViewFragment extends Fragment
       if (timeTitle != null)
       {
         int shour = event.getStart_time().get(Calendar.HOUR_OF_DAY);
+        int min =  event.getStart_time().get(Calendar.MINUTE);
+        String smin;
+        if (min == 0)
+          smin = min + "0";
+        else
+          smin = min + "";
         String starttime;
         if (shour > 12)
         {
           shour = shour - 12;
-          starttime = shour + ":" + event.getStart_time().get(Calendar.MINUTE) + " PM";
+          starttime = shour + ":" + smin + " PM";
         } else
         {
-          starttime = shour + ":" + event.getStart_time().get(Calendar.MINUTE) + " AM";
+          starttime = shour + ":" + smin + " AM";
         }
         timeTitle.setText(starttime);
         timeTitle.setOnClickListener(new View.OnClickListener()
