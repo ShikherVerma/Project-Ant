@@ -112,7 +112,7 @@ public class DayViewFragment extends Fragment
   {
     databaseAccess = DatabaseAccess.getInstance(getActivity());
     databaseAccess.open();
-    List<Event> eventList = databaseAccess.getEvent(mDay);
+    List<Event> eventList = databaseAccess.getEventbyDay(mDay);
     databaseAccess.close();
     View view = inflater.inflate(R.layout.inner_fragment_day_view, container, false);
     ArrayList<Card> cards = new ArrayList<Card>();

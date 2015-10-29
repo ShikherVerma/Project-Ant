@@ -62,7 +62,7 @@ public class DatabaseAccess
     return contact;
   }
 
-  public List<Event> getEvent(int day)
+  public List<Event> getEventbyDay(int day)
   {
     String query = "SELECT * FROM eventdetails WHERE day=" + String.valueOf(day) + " ORDER BY start_time;";
     List<Event> list = new ArrayList<>();
@@ -137,7 +137,6 @@ public class DatabaseAccess
     return list;
   }
 
-
   public List<Contact> getContact()
   {
     String query = "SELECT * FROM contacts;";
@@ -153,7 +152,6 @@ public class DatabaseAccess
     cursor.close();
     return list;
   }
-
 
   public String getResult(String eventname)
   {

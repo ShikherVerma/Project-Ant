@@ -87,24 +87,18 @@ public class HomeFragment extends Fragment
 
   public class CardExample extends Card
   {
-
     private String mNotification;
 
     public CardExample(Context context, String notification)
     {
-      super(context, R.layout.lib_card_example_inner_content);
+      super(context);
       mNotification = notification;
       init();
     }
 
     private void init()
     {
-      //Create a CardHeader
-      CardHeader header = new CardHeader(getActivity());
-
-      //Set the header title
-      header.setTitle(mNotification);
-
+      setTitle(mNotification);
       //TODO : set limit to 50 words after that on click it shows a popup dialog box with the whole news.
     }
   }

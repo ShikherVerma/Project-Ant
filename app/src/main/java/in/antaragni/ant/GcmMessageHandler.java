@@ -20,10 +20,6 @@ import in.antaragni.ant.fragments.EventFragment;
 public class GcmMessageHandler extends GcmListenerService {
   private DatabaseAccess databaseAccess;
 
-
-
-
-
   @Override
   public void onMessageReceived(String from, Bundle data) {
     for (String key : data.keySet()) {
@@ -31,7 +27,7 @@ public class GcmMessageHandler extends GcmListenerService {
       Log.wtf("qwe", String.format("%s %s (%s)", key,
         value.toString(), value.getClass().getName()));
     }
-    /*String type = data.getString("type");
+    String type = data.getString("type");
     String title = data.getString("title");
     String message = "";
     String event_name ;
@@ -43,23 +39,21 @@ public class GcmMessageHandler extends GcmListenerService {
       String start_time = data.getString("start_time");
       String end_time = data.getString("end_time");
       String venue = data.getString("venue");
-      message = message.concat(event_name);
+      message = "Change in details of " + message.concat(event_name);
 
       if (!start_time.isEmpty())
       {
         databaseAccess.updateinfo(event_name, Integer.parseInt(start_time),Integer.parseInt(end_time));
-        message = message.concat(" " + start_time + "-" + end_time);
       }
       if (!venue.isEmpty())
       {
         databaseAccess.updateinfo(event_name, venue);
-        message = message.concat(" " + venue);
       }
       createNotification(title, message, event_name, type);
     }
     else if (type.equals("result")){
-      message = data.getString("result");
       event_name = data.getString("eventname");
+      message = "Results declared for " + event_name;
       databaseAccess.updateresult(event_name, message);
       createNotification(title, message, event_name, type);
     }
@@ -68,7 +62,7 @@ public class GcmMessageHandler extends GcmListenerService {
       createNotification(title, message, "notify", type);
     }
     databaseAccess.addnotification(message,type);
-    databaseAccess.close();*/
+    databaseAccess.close();
   }
 
   // Creates notification based on title and body received
@@ -101,7 +95,4 @@ public class GcmMessageHandler extends GcmListenerService {
 
     mNotificationManager.notify(m, mBuilder.build());
   }
-
-
 }
-
