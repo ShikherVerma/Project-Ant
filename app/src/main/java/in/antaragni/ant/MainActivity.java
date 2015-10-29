@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity
   private GCMClientManager pushClientManager;
   String PROJECT_NUMBER = "138444406408";
   public static String EXTRA_ACTION = "action";
-
+  public Snackbar mSnackBar;
+  public AlertDialog alertDialog;
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
             } else if (drawerItem.getIdentifier() == SCHEDULE)
             {
+              showloading();
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = ScheduleFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
@@ -203,12 +206,17 @@ public class MainActivity extends AppCompatActivity
         // exponential back-off when retrying.
       }
     });
-
   }
 
-  public void showSnackBar(String s)
+  public void showSnackBarIndefinite(String s)
   {
-    Snackbar.make(findViewById(R.id.main_screen), s, Snackbar.LENGTH_SHORT).show(); // Don’t forget to show!
+    mSnackBar = Snackbar.make(findViewById(R.id.main_screen), s, Snackbar.LENGTH_INDEFINITE);
+    mSnackBar.show();// Don’t forget to show!
+  }
+
+  public void dismissSnackBar()
+  {
+    mSnackBar.dismiss();
   }
 
   @Override
@@ -230,5 +238,26 @@ public class MainActivity extends AppCompatActivity
     {
       super.onBackPressed();
     }
+  }
+
+  public void showloading()
+  {
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+    // set dialog message
+    alertDialogBuilder
+      .setMessage("Loading ...")
+      .setCancelable(false);
+
+    // create alert dialog
+    alertDialog = alertDialogBuilder.create();
+
+    // show it
+    alertDialog.show();
+  }
+
+  public void dismissloading()
+  {
+    alertDialog.dismiss();
   }
 }
