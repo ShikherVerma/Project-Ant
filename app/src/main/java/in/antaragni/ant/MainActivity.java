@@ -27,12 +27,12 @@ import in.antaragni.ant.fragments.ScheduleFragment;
 
 public class MainActivity extends AppCompatActivity
 {
-  protected int HOME = 1;
-  protected int SCHEDULE = 2;
-  protected int EVENTS = 3;
-  protected int MAP = 4;
-  protected int CONTACT = 5;
-  protected int ABOUT = 6;
+  protected static int HOME = 1;
+  protected static int SCHEDULE = 2;
+  protected static int EVENTS = 3;
+  protected static int MAP = 4;
+  protected static int CONTACT = 5;
+  protected static int ABOUT = 6;
 
   //save our header or result
   private Drawer result = null;
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             } else if (drawerItem.getIdentifier() == MAP)
             {
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
-              f = MapFragment.newInstance("CCD");
+              f = MapFragment.newInstance(null);
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
             } else if (drawerItem.getIdentifier() == CONTACT)
             {
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity
 
   public void startMap(String v)
   {
-    result.setSelection(MAP);
+    result.setSelection(3);
     getSupportActionBar().setTitle("Map");
     f = MapFragment.newInstance(v);
     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();

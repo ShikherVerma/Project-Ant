@@ -204,6 +204,11 @@ public class DayViewFragment extends Fragment
               break;
             case MAP:
               ((MainActivity)getActivity()).startMap(event.getVenue().getLocation());
+              /*
+              Intent intent = new Intent(getContext(), MainActivity.class);
+              intent.putExtra(MainActivity.EXTRA_ACTION, event.getVenue().getLocation());
+              getContext().startActivity(intent);
+              */
               break;
           }
         }
@@ -332,7 +337,6 @@ public class DayViewFragment extends Fragment
             context.startActivity(intent);
           }
         });
-
       }
     }
   }
