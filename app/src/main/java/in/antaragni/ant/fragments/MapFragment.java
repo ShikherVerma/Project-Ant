@@ -92,10 +92,14 @@ public class MapFragment extends Fragment implements
     Button button = (Button) v.findViewById(R.id.button);
     Spinner fromlist = (Spinner) v.findViewById(R.id.from_dropdown_list);
     Spinner tolist = (Spinner) v.findViewById(R.id.to_dropdown_list);
-    String[] from_items = new String[]{"From","My Location" ,"CCD", "MT", "Hall 2", "Hall 5", "Hall 1", "Hall 8", "Hall 7", "Hall 4", "OAT", "CSE Canteen", "Canteen"};
-    String[] to_items = new String[]{"To","CCD", "MT", "Hall 2", "Hall 5", "Hall 1", "Hall 8", "Hall 7", "Hall 4", "OAT", "CSE Canteen", "Canteen"};
+    String[] from_items = new String[]{"From" ,"CCD", "MT", "Hall 2", "Hall 5", "Hall 1", "Hall 8", "Hall 7", "Hall 4", "OAT", "CSE Canteen", "Canteen", "Main Auditorium","LHC","Informals Stage",
+    "Desk Submission","Pronites Ground","Adventure zone","Outreach Auditorium","Nukkad/Dance Stage","Swimming pool Parking lot"};
+    String[] to_items = new String[]{"To","CCD", "MT", "Hall 2", "Hall 5", "Hall 1", "Hall 8", "Hall 7", "Hall 4", "OAT", "CSE Canteen", "Canteen", "Main Auditorium","LHC","Informals Stage",
+      "Desk Submission","Pronites Ground","Adventure zone","Outreach Auditorium","Nukkad/Dance Stage","Swimming pool Parking lot"};
     dba.open();
     if (title != null) {
+      if (title.equals("Pronite Ground"))  title = "Pronites Ground";
+      if (title.equals("Front of Nukkad/Dance Floor"))  title = "Nukkad/Dance Stage";
       Venue init_pos = dba.getVenue(title);
       map.moveCamera(CameraUpdateFactory.newLatLngZoom(init_pos.getLatLng(), 15));
       final Marker marker = map.addMarker(new MarkerOptions().position(init_pos.getLatLng()).title(title).alpha(0));
@@ -184,6 +188,7 @@ public class MapFragment extends Fragment implements
       public void onClick(View v)
       {
         if ((from_loc != "From") && (to_loc != "To")) {
+          map.clear();
           new RotaTask(context, map, from_coor, to_coor).execute();
         }
         else {
@@ -210,7 +215,6 @@ public class MapFragment extends Fragment implements
   @Override
   public void onConnected(Bundle bundle)
   {
-    Log.wtf("qwe","connected");
     Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
     if (location == null) {
       LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);

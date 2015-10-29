@@ -160,8 +160,12 @@ public class ContactFragment extends Fragment
       Resources resource =  getActivity().getResources();
       String imagename = mValues.get(position).getName();
       imagename = imagename.replace(' ','_');
-      imagename = imagename.replace('-','_');
+      imagename = imagename.replace('-', '_');
+      imagename = imagename.toLowerCase();
       int resID = resource.getIdentifier(imagename, "drawable", getActivity().getPackageName());
+      if (resID == 0){
+        resID = resource.getIdentifier("generic", "drawable", getActivity().getPackageName());;
+      }
       Glide.with(holder.mImageView.getContext())
         .load(resID)
         .fitCenter()
