@@ -306,23 +306,7 @@ public class CategoryViewFragment extends Fragment
 
       if (timeTitle != null)
       {
-        int shour = event.getStart_time().get(Calendar.HOUR_OF_DAY);
-        int min =  event.getStart_time().get(Calendar.MINUTE);
-        String smin;
-        if (min == 0)
-          smin = min + "0";
-        else
-          smin = min + "";
-        String starttime;
-        if (shour > 12)
-        {
-          shour = shour - 12;
-          starttime = shour + ":" + smin + " PM";
-        } else
-        {
-          starttime = shour + ":" + smin + " AM";
-        }
-        timeTitle.setText(starttime);
+        timeTitle.setText("Day " + event.getDay());
         timeTitle.setOnClickListener(new View.OnClickListener()
         {
           @Override

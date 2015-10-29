@@ -50,7 +50,7 @@ public class GcmMessageHandler extends GcmListenerService {
     else if (type.equals("result")){
       event_name = data.getString("eventname");
       message = "Results declared for " + event_name;
-      databaseAccess.updateresult(event_name, message);
+      databaseAccess.updateresult(event_name, data.getString("result"));
       createNotification(title, message, event_name, type);
     }
     else {
