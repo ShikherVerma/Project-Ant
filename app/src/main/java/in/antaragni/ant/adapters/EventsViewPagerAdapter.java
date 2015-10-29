@@ -5,11 +5,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import in.antaragni.ant.fragments.inner.CategoryViewFragment;
-import in.antaragni.ant.fragments.inner.CompetitionTypesFragment;
 
 public class EventsViewPagerAdapter extends FragmentPagerAdapter
 {
-  private static int NUM_ITEMS = 5;
+  private static int NUM_ITEMS = 10;
 
   public EventsViewPagerAdapter(FragmentManager fragmentManager)
   {
@@ -30,15 +29,27 @@ public class EventsViewPagerAdapter extends FragmentPagerAdapter
     switch (position)
     {
       case 0:
-        return CompetitionTypesFragment.newInstance();
+        return CategoryViewFragment.newInstance("Informals");
       case 1:
-        return CategoryViewFragment.newInstance("Semi Pro");
+        return CategoryViewFragment.newInstance("Pronite");
       case 2:
-        return CategoryViewFragment.newInstance("Pro Nites");
+        return CategoryViewFragment.newInstance("Professional show");
       case 3:
-        return CategoryViewFragment.newInstance("Pro Events");
+        return CategoryViewFragment.newInstance("dance");
       case 4:
-        return CategoryViewFragment.newInstance("Social Initiatives");
+        return CategoryViewFragment.newInstance("hle");
+      case 5:
+        return CategoryViewFragment.newInstance("drama");
+      case 6:
+        return CategoryViewFragment.newInstance("els");
+      case 7:
+        return CategoryViewFragment.newInstance("music");
+      case 8:
+        return CategoryViewFragment.newInstance("quiz");
+      case 9:
+        return CategoryViewFragment.newInstance("fmc");
+      case 10:
+        return CategoryViewFragment.newInstance("fine_arts");
       default:
         return null;
     }
@@ -51,15 +62,27 @@ public class EventsViewPagerAdapter extends FragmentPagerAdapter
     switch (position)
     {
       case 0:
-        return "Competition";
+        return "Informals";
       case 1:
-        return "Semi Pro";
+        return "Pronite";
       case 2:
-        return "Pro Nites";
+        return "Pro show";
       case 3:
-        return "Pro Events";
+        return "Dance";
       case 4:
-        return "Social Initiatives";
+        return "Hindi Lits";
+      case 5:
+        return "Dramatics";
+      case 6:
+        return "English Lits";
+      case 7:
+        return "Music";
+      case 8:
+        return "Quiz";
+      case 9:
+        return "Films & Media";
+      case 10:
+        return "Fine Arts";
       default:
         return "ERROR";
     }

@@ -147,6 +147,7 @@ public class DatabaseAccess
       day = cursor.getInt(6);
       GregorianCalendar start_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(5) / 100, cursor.getInt(5) % 100);
       GregorianCalendar end_time = new GregorianCalendar(2015, 10 + (day / 4), (28 + day + (day / 4)) % 32, cursor.getInt(4) / 100, cursor.getInt(4) % 100);
+
       if(cursor.getString(7).equals("hle"))  category = "HLE";
       if(cursor.getString(7).equals("els"))  category = "ELS";
       if(cursor.getString(7).equals("drama"))  category = "Dramatics";
@@ -156,6 +157,7 @@ public class DatabaseAccess
       if(cursor.getString(7).equals("fine_arts"))  category = "Fine Arts";
       if(cursor.getString(7).equals("fmc"))  category = "Films and Media";
       Event event = new Event(category, cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(7)));
+
       list.add(event);
       cursor.moveToNext();
     }

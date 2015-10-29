@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import in.antaragni.ant.R;
 
@@ -35,8 +36,9 @@ public class AboutFragment extends Fragment
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
   {
-    // Inflate the layout for this fragment
-    // don't look at this layout it's just a listView to show how to handle the keyboard
-    return inflater.inflate(R.layout.fragment_about, container, false);
+    View view = inflater.inflate(R.layout.fragment_about, container, false);
+    TextView tv = (TextView) view.findViewById(R.id.tv);
+    tv.setText("Antaragni is not a mere cultural festival. It is a legacy, a collection of experiences and accomplishments that has been accumulated for 50 years. It is a dynasty that has been build upon the sweat and toil of many. We take pride in our heritage and invite you to be a part of this journey.");
+    return view;
   }
 }
