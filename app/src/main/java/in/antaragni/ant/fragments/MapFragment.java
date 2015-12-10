@@ -3,16 +3,9 @@ package in.antaragni.ant.fragments;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-
-
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
-
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -36,7 +28,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 
 import in.antaragni.ant.R;
 import in.antaragni.ant.adapters.RotaTask;
@@ -123,7 +114,6 @@ public class MapFragment extends Fragment implements
     }
 
     CameraPosition temp = map.getCameraPosition();
-    Log.wtf("qwe", temp.toString());
     ArrayAdapter<String> from_adapter = new ArrayAdapter<String>(this.getActivity(),
       android.R.layout.simple_spinner_item, from_items);
     ArrayAdapter<String> to_adapter = new ArrayAdapter<String>(this.getActivity(),
@@ -239,7 +229,6 @@ public class MapFragment extends Fragment implements
   private void handleNewLocation(Location location) {
     double currentLatitude = location.getLatitude();
     double currentLongitude = location.getLongitude();
-    Log.wtf("qwe", "handle");
   }
 
   @Override

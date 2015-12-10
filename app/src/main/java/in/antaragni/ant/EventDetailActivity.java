@@ -16,7 +16,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,15 +52,12 @@ public class EventDetailActivity extends AppCompatActivity
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_event_detail);
-    Log.i("eventshit","onCreate started for event details screen");
     Intent intent = getIntent();
     final String EventName = intent.getStringExtra(EXTRA_NAME);
-    Log.i("eventshit",EventName);
     databaseAccess = DatabaseAccess.getInstance(this);
     databaseAccess.open();
     mEvent = databaseAccess.getParticularEvent(EventName);
     databaseAccess.close();
-    Log.i("eventshit", mEvent.getName());
     final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -111,10 +107,8 @@ public class EventDetailActivity extends AppCompatActivity
         {
           Calendar beginTime = Calendar.getInstance();
           beginTime.set(2015, mEvent.getStart_time().get(Calendar.MONTH), mEvent.getStart_time().get(Calendar.DATE), mEvent.getStart_time().get(Calendar.HOUR), mEvent.getStart_time().get(Calendar.MINUTE));
-          Log.i("ant calendar", mEvent.getStart_time().get(Calendar.MONTH) + "  " + mEvent.getStart_time().get(Calendar.DATE) + "  " + mEvent.getStart_time().get(Calendar.HOUR) + "  " + mEvent.getStart_time().get(Calendar.MINUTE));
           Calendar endTime = Calendar.getInstance();
           endTime.set(2015, mEvent.getEnd_time().get(Calendar.MONTH), mEvent.getEnd_time().get(Calendar.DATE), mEvent.getEnd_time().get(Calendar.HOUR), mEvent.getEnd_time().get(Calendar.MINUTE));
-          Log.i("ant calendar", mEvent.getEnd_time().get(Calendar.MONTH) + "  " + mEvent.getEnd_time().get(Calendar.DATE) + "  " + mEvent.getEnd_time().get(Calendar.HOUR) + "  " + mEvent.getEnd_time().get(Calendar.MINUTE));
           Intent intent = new Intent(Intent.ACTION_INSERT)
             .setData(CalendarContract.Events.CONTENT_URI)
             .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
@@ -126,22 +120,16 @@ public class EventDetailActivity extends AppCompatActivity
         }
       }
     });
-    Log.i("eventshit", "calendar thing done, calling populate view");
-
     populateViews();
 
-    Log.i("eventshit", "Calling loadBackDrop");
     loadBackdrop();
   }
 
   public void populateViews()
   {
-    Log.i("eventshit", "populate view");
-
     final Venue venue;                                              //Venue of the event
     final String description = mEvent.getDescription();             //description of the event, must be more than 50 works
     final Contact contact;
-    Log.i("eventshit", "getting view references");
 
     TextView categoryText = (TextView) findViewById(R.id.categorytext);
     TextView timeText = (TextView) findViewById(R.id.timetext);
@@ -151,7 +139,6 @@ public class EventDetailActivity extends AppCompatActivity
     TextView resultText = (TextView) findViewById(R.id.resulttext);
     categoryText.setText(mEvent.getCategory());
 
-    Log.i("eventshit", "getting view references DONE");
     int shour = mEvent.getStart_time().get(Calendar.HOUR_OF_DAY);
     int min =  mEvent.getStart_time().get(Calendar.MINUTE);
     String smin;
@@ -189,19 +176,14 @@ public class EventDetailActivity extends AppCompatActivity
     }
     String time = starttime + " to " + endtime ;
     timeText.setText(time);
-    Log.i("eventshit", "Time set");
     venueText.setText(mEvent.getVenue().getLocation());
-    Log.i("eventshit", "Venue set");
     contactText.setText(mEvent.getContact().getName());
-    Log.i("eventshit", "contact set");
     if(description!=null && description.length()>10)
     {
-      Log.i("eventshit", "Description set");
       descriptionText.setText(description);
     }
     else
     {
-      Log.i("eventshit","ping pong");
       descriptionText.setVisibility(View.GONE);
       LinearLayout temp = (LinearLayout) findViewById(R.id.descriptioncontainer);
       temp.setVisibility(View.GONE);
@@ -255,9 +237,7 @@ public class EventDetailActivity extends AppCompatActivity
     long endMillis = 0;
     Calendar beginTime = Calendar.getInstance();
     beginTime.set(2015, mEvent.getStart_time().get(Calendar.MONTH) - 1, mEvent.getStart_time().get(Calendar.DATE), mEvent.getStart_time().get(Calendar.HOUR), mEvent.getStart_time().get(Calendar.MINUTE));
-    Log.i("ant calendar", mEvent.getStart_time().get(Calendar.MONTH) + "  " + mEvent.getStart_time().get(Calendar.DATE) + "  " + mEvent.getStart_time().get(Calendar.HOUR) + "  " + mEvent.getStart_time().get(Calendar.MINUTE));
     startMillis = beginTime.getTimeInMillis();
-    Log.i("ant calendar", mEvent.getEnd_time().get(Calendar.MONTH) + "  " + mEvent.getEnd_time().get(Calendar.DATE) + "  " + mEvent.getEnd_time().get(Calendar.HOUR) + "  " + mEvent.getEnd_time().get(Calendar.MINUTE));
     Calendar endTime = Calendar.getInstance();
     endTime.set(2015, mEvent.getEnd_time().get(Calendar.MONTH) - 1, mEvent.getEnd_time().get(Calendar.DATE), mEvent.getEnd_time().get(Calendar.HOUR), mEvent.getEnd_time().get(Calendar.MINUTE));
     endMillis = endTime.getTimeInMillis();

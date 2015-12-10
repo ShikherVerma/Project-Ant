@@ -51,11 +51,9 @@ public class GCMClientManager {
       if (regid.isEmpty()) {
         registerInBackground(handler);
       } else { // got id from cache
-        Log.i(TAG, regid);
         handler.onSuccess(regid, false);
       }
     } else { // no play services
-      Log.i(TAG, "No valid Google Play Services APK found.");
     }
   }
 
