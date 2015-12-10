@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -74,7 +73,6 @@ public class DayViewFragment extends Fragment
     String[] selectionArgs = new String[]{"com.google"};
     // Submit the query and get a Cursor object back.
     cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);
-    Log.i("ant calendar", " attempting to read calendar" + mDay);
     while (cur.moveToNext())
     {
       long calID = 0;
@@ -87,10 +85,8 @@ public class DayViewFragment extends Fragment
       displayName = cur.getString(PROJECTION_DISPLAY_NAME_INDEX);
       accountName = cur.getString(PROJECTION_ACCOUNT_NAME_INDEX);
       ownerName = cur.getString(PROJECTION_OWNER_ACCOUNT_INDEX);
-      Log.i("ant calendar", " day :" + mDay + " data : " + calID + "  " + accountName + "  " + displayName + "  " + ownerName);
       if (mGoogleCalendarNumber == -1)
       {
-        Log.i("ant calendar", " calendar id is " + calID );
         mGoogleCalendarNumber = calID;
       }
     }
@@ -188,10 +184,8 @@ public class DayViewFragment extends Fragment
               {
                 Calendar beginTime = Calendar.getInstance();
                 beginTime.set(2015, event.getStart_time().get(Calendar.MONTH), event.getStart_time().get(Calendar.DATE), event.getStart_time().get(Calendar.HOUR), event.getStart_time().get(Calendar.MINUTE));
-                Log.i("ant calendar", event.getStart_time().get(Calendar.MONTH) + "  " + event.getStart_time().get(Calendar.DATE) +"  " + event.getStart_time().get(Calendar.HOUR) +"  " + event.getStart_time().get(Calendar.MINUTE));
                 Calendar endTime = Calendar.getInstance();
                 endTime.set(2015, event.getEnd_time().get(Calendar.MONTH), event.getEnd_time().get(Calendar.DATE), event.getEnd_time().get(Calendar.HOUR), event.getEnd_time().get(Calendar.MINUTE));
-                Log.i("ant calendar", event.getEnd_time().get(Calendar.MONTH) + "  " + event.getEnd_time().get(Calendar.DATE) + "  " + event.getEnd_time().get(Calendar.HOUR) + "  " + event.getEnd_time().get(Calendar.MINUTE));
                 Intent intent = new Intent(Intent.ACTION_INSERT)
                   .setData(CalendarContract.Events.CONTENT_URI)
                   .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
@@ -240,9 +234,7 @@ public class DayViewFragment extends Fragment
       long endMillis = 0;
       Calendar beginTime = Calendar.getInstance();
       beginTime.set(2015,event.getStart_time().get(Calendar.MONTH) - 1 , event.getStart_time().get(Calendar.DATE), event.getStart_time().get(Calendar.HOUR), event.getStart_time().get(Calendar.MINUTE));
-      Log.i("ant calendar", event.getStart_time().get(Calendar.MONTH) + "  " + event.getStart_time().get(Calendar.DATE) + "  " + event.getStart_time().get(Calendar.HOUR) + "  " + event.getStart_time().get(Calendar.MINUTE));
       startMillis = beginTime.getTimeInMillis();
-      Log.i("ant calendar", event.getEnd_time().get(Calendar.MONTH)  + "  " + event.getEnd_time().get(Calendar.DATE) + "  " + event.getEnd_time().get(Calendar.HOUR) + "  " + event.getEnd_time().get(Calendar.MINUTE));
       Calendar endTime = Calendar.getInstance();
       endTime.set(2015 , event.getEnd_time().get(Calendar.MONTH) - 1, event.getEnd_time().get(Calendar.DATE), event.getEnd_time().get(Calendar.HOUR), event.getEnd_time().get(Calendar.MINUTE));
       endMillis = endTime.getTimeInMillis();
@@ -284,7 +276,6 @@ public class DayViewFragment extends Fragment
           @Override
           public void onClick(View view)
           {
-            Toast.makeText(getContext(), "Click Listener card category", Toast.LENGTH_SHORT).show();
             Context context = view.getContext();
             Intent intent = new Intent(context, EventDetailActivity.class);
             intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
@@ -301,7 +292,6 @@ public class DayViewFragment extends Fragment
           @Override
           public void onClick(View view)
           {
-            Toast.makeText(getContext(), "Click Listener card venue", Toast.LENGTH_SHORT).show();
             Context context = view.getContext();
             Intent intent = new Intent(context, EventDetailActivity.class);
             intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
@@ -334,7 +324,6 @@ public class DayViewFragment extends Fragment
           @Override
           public void onClick(View view)
           {
-            Toast.makeText(getContext(), "Click Listener card time", Toast.LENGTH_SHORT).show();
             Context context = view.getContext();
             Intent intent = new Intent(context, EventDetailActivity.class);
             intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());

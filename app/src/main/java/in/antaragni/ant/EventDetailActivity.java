@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -15,11 +16,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,15 +52,12 @@ public class EventDetailActivity extends AppCompatActivity
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_event_detail);
-    Log.i("antaragni","onCreate started for event details screen");
     Intent intent = getIntent();
     final String EventName = intent.getStringExtra(EXTRA_NAME);
-    Log.i("antaragni",EventName);
     databaseAccess = DatabaseAccess.getInstance(this);
     databaseAccess.open();
     mEvent = databaseAccess.getParticularEvent(EventName);
     databaseAccess.close();
-    Log.i("antaragni", mEvent.getName());
     final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -109,10 +107,8 @@ public class EventDetailActivity extends AppCompatActivity
         {
           Calendar beginTime = Calendar.getInstance();
           beginTime.set(2015, mEvent.getStart_time().get(Calendar.MONTH), mEvent.getStart_time().get(Calendar.DATE), mEvent.getStart_time().get(Calendar.HOUR), mEvent.getStart_time().get(Calendar.MINUTE));
-          Log.i("ant calendar", mEvent.getStart_time().get(Calendar.MONTH) + "  " + mEvent.getStart_time().get(Calendar.DATE) + "  " + mEvent.getStart_time().get(Calendar.HOUR) + "  " + mEvent.getStart_time().get(Calendar.MINUTE));
           Calendar endTime = Calendar.getInstance();
           endTime.set(2015, mEvent.getEnd_time().get(Calendar.MONTH), mEvent.getEnd_time().get(Calendar.DATE), mEvent.getEnd_time().get(Calendar.HOUR), mEvent.getEnd_time().get(Calendar.MINUTE));
-          Log.i("ant calendar", mEvent.getEnd_time().get(Calendar.MONTH) + "  " + mEvent.getEnd_time().get(Calendar.DATE) + "  " + mEvent.getEnd_time().get(Calendar.HOUR) + "  " + mEvent.getEnd_time().get(Calendar.MINUTE));
           Intent intent = new Intent(Intent.ACTION_INSERT)
             .setData(CalendarContract.Events.CONTENT_URI)
             .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
@@ -124,16 +120,17 @@ public class EventDetailActivity extends AppCompatActivity
         }
       }
     });
-
     populateViews();
+
     loadBackdrop();
   }
 
   public void populateViews()
   {
-    final Venue venue;                    //Venue of the event
-    final String description;             //description of the event, must be more than 50 works
+    final Venue venue;                                              //Venue of the event
+    final String description = mEvent.getDescription();             //description of the event, must be more than 50 works
     final Contact contact;
+
     TextView categoryText = (TextView) findViewById(R.id.categorytext);
     TextView timeText = (TextView) findViewById(R.id.timetext);
     TextView venueText = (TextView) findViewById(R.id.venuetext);
@@ -141,33 +138,65 @@ public class EventDetailActivity extends AppCompatActivity
     TextView descriptionText = (TextView) findViewById(R.id.descriptiontext);
     TextView resultText = (TextView) findViewById(R.id.resulttext);
     categoryText.setText(mEvent.getCategory());
+
     int shour = mEvent.getStart_time().get(Calendar.HOUR_OF_DAY);
+    int min =  mEvent.getStart_time().get(Calendar.MINUTE);
+    String smin;
+    if (min == 0)
+      smin = min + "0";
+    else
+      smin = min + "";
+
     String starttime;
+
     if (shour > 12)
     {
       shour = shour - 12;
-      starttime = shour + ":" + mEvent.getStart_time().get(Calendar.MINUTE) + " PM";
+      starttime = shour + ":" + smin + " PM";
     } else
     {
-      starttime = shour + ":" + mEvent.getStart_time().get(Calendar.MINUTE) + " AM";
+      starttime = shour + ":" + smin + " AM";
     }
     int ehour = mEvent.getEnd_time().get(Calendar.HOUR_OF_DAY);
+    min =  mEvent.getStart_time().get(Calendar.MINUTE);
+    String emin;
+    if (min == 0)
+      emin = min + "0";
+    else
+      emin = min + "";
+
     String endtime;
     if (ehour > 12)
     {
       ehour = ehour - 12;
-      endtime = ehour + ":" + mEvent.getEnd_time().get(Calendar.MINUTE) + " PM";
+      endtime = ehour + ":" + emin + " PM";
     } else
     {
-      endtime = ehour + ":" + mEvent.getEnd_time().get(Calendar.MINUTE) + " AM";
+      endtime = ehour + ":" + emin + " AM";
     }
     String time = starttime + " to " + endtime ;
     timeText.setText(time);
     venueText.setText(mEvent.getVenue().getLocation());
     contactText.setText(mEvent.getContact().getName());
-    descriptionText.setText(mEvent.getDescription());
-    //TODO : change the result view in layout and check if result is declared, then view it.
-    resultText.setText("results not declared yet");
+    if(description!=null && description.length()>10)
+    {
+      descriptionText.setText(description);
+    }
+    else
+    {
+      descriptionText.setVisibility(View.GONE);
+      LinearLayout temp = (LinearLayout) findViewById(R.id.descriptioncontainer);
+      temp.setVisibility(View.GONE);
+    }
+    databaseAccess = DatabaseAccess.getInstance(this);
+    databaseAccess.open();
+    String result = databaseAccess.getResult(mEvent.getName());
+    databaseAccess.close();
+
+    if (result == null)
+      resultText.setText("results not declared yet");
+    else
+      resultText.setText(result);
   }
 
   // Projection array. Creating indices for this array instead of doing
@@ -208,9 +237,7 @@ public class EventDetailActivity extends AppCompatActivity
     long endMillis = 0;
     Calendar beginTime = Calendar.getInstance();
     beginTime.set(2015, mEvent.getStart_time().get(Calendar.MONTH) - 1, mEvent.getStart_time().get(Calendar.DATE), mEvent.getStart_time().get(Calendar.HOUR), mEvent.getStart_time().get(Calendar.MINUTE));
-    Log.i("ant calendar", mEvent.getStart_time().get(Calendar.MONTH) + "  " + mEvent.getStart_time().get(Calendar.DATE) + "  " + mEvent.getStart_time().get(Calendar.HOUR) + "  " + mEvent.getStart_time().get(Calendar.MINUTE));
     startMillis = beginTime.getTimeInMillis();
-    Log.i("ant calendar", mEvent.getEnd_time().get(Calendar.MONTH) + "  " + mEvent.getEnd_time().get(Calendar.DATE) + "  " + mEvent.getEnd_time().get(Calendar.HOUR) + "  " + mEvent.getEnd_time().get(Calendar.MINUTE));
     Calendar endTime = Calendar.getInstance();
     endTime.set(2015, mEvent.getEnd_time().get(Calendar.MONTH) - 1, mEvent.getEnd_time().get(Calendar.DATE), mEvent.getEnd_time().get(Calendar.HOUR), mEvent.getEnd_time().get(Calendar.MINUTE));
     endMillis = endTime.getTimeInMillis();
@@ -293,10 +320,36 @@ public class EventDetailActivity extends AppCompatActivity
     return true;
   }
 
-  public static int getEventDrawable()
+  public int getEventDrawable()
   {
-    return R.drawable.bheed;
-    //TODO : get event image same as
+    String cat = mEvent.getCategory();
+    switch (cat)
+    {
+      case "Quiz":
+        return R.drawable.quiz;
+      case "Musicals":
+        return R.drawable.music;
+      case "HLE":
+        return R.drawable.hle;
+      case "ELS":
+        return R.drawable.els;
+      case "Dramatics":
+        return R.drawable.drama;
+      case "Dance":
+        return R.drawable.dance;
+      case "Fine Arts":
+        return R.drawable.fine_arts;
+      case "Films and Media":
+        return R.drawable.fmc;
+      case "Informals":
+        return R.drawable.informals;
+      case "Pronite":
+        return R.drawable.pronite;
+      case "Professional show":
+        return R.drawable.semipro;
+      default:
+      return R.drawable.antlogo;
+    }
   }
 
   public void showSnackBar(CharSequence text, int length)

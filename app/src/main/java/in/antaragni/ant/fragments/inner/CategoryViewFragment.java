@@ -74,7 +74,6 @@ public class CategoryViewFragment extends Fragment
     String[] selectionArgs = new String[]{"com.google"};
     // Submit the query and get a Cursor object back.
     cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);
-    Log.i("ant calendar", " attempting to read calendar" + mCategory);
     while (cur.moveToNext())
     {
       long calID = 0;
@@ -89,7 +88,6 @@ public class CategoryViewFragment extends Fragment
       ownerName = cur.getString(PROJECTION_OWNER_ACCOUNT_INDEX);
       if (mGoogleCalendarNumber == -1)
       {
-        Log.i("ant calendar", " calendar id is " + calID );
         mGoogleCalendarNumber = calID;
       }
     }
@@ -186,10 +184,8 @@ public class CategoryViewFragment extends Fragment
               {
                 Calendar beginTime = Calendar.getInstance();
                 beginTime.set(2015, event.getStart_time().get(Calendar.MONTH), event.getStart_time().get(Calendar.DATE), event.getStart_time().get(Calendar.HOUR), event.getStart_time().get(Calendar.MINUTE));
-                Log.i("ant calendar", event.getStart_time().get(Calendar.MONTH) + "  " + event.getStart_time().get(Calendar.DATE) +"  " + event.getStart_time().get(Calendar.HOUR) +"  " + event.getStart_time().get(Calendar.MINUTE));
                 Calendar endTime = Calendar.getInstance();
                 endTime.set(2015, event.getEnd_time().get(Calendar.MONTH), event.getEnd_time().get(Calendar.DATE), event.getEnd_time().get(Calendar.HOUR), event.getEnd_time().get(Calendar.MINUTE));
-                Log.i("ant calendar", event.getEnd_time().get(Calendar.MONTH) + "  " + event.getEnd_time().get(Calendar.DATE) + "  " + event.getEnd_time().get(Calendar.HOUR) + "  " + event.getEnd_time().get(Calendar.MINUTE));
                 Intent intent = new Intent(Intent.ACTION_INSERT)
                   .setData(CalendarContract.Events.CONTENT_URI)
                   .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
@@ -202,11 +198,6 @@ public class CategoryViewFragment extends Fragment
               break;
             case MAP:
               ((MainActivity)getActivity()).startMap(event.getVenue().getLocation());
-              /*
-              Intent intent = new Intent(getContext(), MainActivity.class);
-              intent.putExtra(MainActivity.EXTRA_ACTION, event.getVenue().getLocation());
-              getContext().startActivity(intent);
-              */
               break;
           }
         }
@@ -219,7 +210,6 @@ public class CategoryViewFragment extends Fragment
         @Override
         public void onClick(Card card, View view)
         {
-          Toast.makeText(getContext(), "Click Listener card=" + event.getName(), Toast.LENGTH_SHORT).show();
           Context context = view.getContext();
           Intent intent = new Intent(context, EventDetailActivity.class);
           intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
@@ -234,9 +224,7 @@ public class CategoryViewFragment extends Fragment
       long endMillis = 0;
       Calendar beginTime = Calendar.getInstance();
       beginTime.set(2015,event.getStart_time().get(Calendar.MONTH) - 1 , event.getStart_time().get(Calendar.DATE), event.getStart_time().get(Calendar.HOUR), event.getStart_time().get(Calendar.MINUTE));
-      Log.i("ant calendar", event.getStart_time().get(Calendar.MONTH) + "  " + event.getStart_time().get(Calendar.DATE) + "  " + event.getStart_time().get(Calendar.HOUR) + "  " + event.getStart_time().get(Calendar.MINUTE));
       startMillis = beginTime.getTimeInMillis();
-      Log.i("ant calendar", event.getEnd_time().get(Calendar.MONTH)  + "  " + event.getEnd_time().get(Calendar.DATE) + "  " + event.getEnd_time().get(Calendar.HOUR) + "  " + event.getEnd_time().get(Calendar.MINUTE));
       Calendar endTime = Calendar.getInstance();
       endTime.set(2015 , event.getEnd_time().get(Calendar.MONTH) - 1, event.getEnd_time().get(Calendar.DATE), event.getEnd_time().get(Calendar.HOUR), event.getEnd_time().get(Calendar.MINUTE));
       endMillis = endTime.getTimeInMillis();
@@ -278,7 +266,6 @@ public class CategoryViewFragment extends Fragment
           @Override
           public void onClick(View view)
           {
-            Toast.makeText(getContext(), "Click Listener card category", Toast.LENGTH_SHORT).show();
             Context context = view.getContext();
             Intent intent = new Intent(context, EventDetailActivity.class);
             intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
@@ -295,7 +282,6 @@ public class CategoryViewFragment extends Fragment
           @Override
           public void onClick(View view)
           {
-            Toast.makeText(getContext(), "Click Listener card venue", Toast.LENGTH_SHORT).show();
             Context context = view.getContext();
             Intent intent = new Intent(context, EventDetailActivity.class);
             intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());
@@ -306,29 +292,12 @@ public class CategoryViewFragment extends Fragment
 
       if (timeTitle != null)
       {
-        int shour = event.getStart_time().get(Calendar.HOUR_OF_DAY);
-        int min =  event.getStart_time().get(Calendar.MINUTE);
-        String smin;
-        if (min == 0)
-          smin = min + "0";
-        else
-          smin = min + "";
-        String starttime;
-        if (shour > 12)
-        {
-          shour = shour - 12;
-          starttime = shour + ":" + smin + " PM";
-        } else
-        {
-          starttime = shour + ":" + smin + " AM";
-        }
-        timeTitle.setText(starttime);
+        timeTitle.setText("Day " + event.getDay());
         timeTitle.setOnClickListener(new View.OnClickListener()
         {
           @Override
           public void onClick(View view)
           {
-            Toast.makeText(getContext(), "Click Listener card time", Toast.LENGTH_SHORT).show();
             Context context = view.getContext();
             Intent intent = new Intent(context, EventDetailActivity.class);
             intent.putExtra(EventDetailActivity.EXTRA_NAME, event.getName());

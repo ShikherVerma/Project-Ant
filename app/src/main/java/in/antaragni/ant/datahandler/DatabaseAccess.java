@@ -112,7 +112,10 @@ public class DatabaseAccess
     if(cursor.getString(7).equals("quiz"))  category = "Quiz";
     if(cursor.getString(7).equals("fine_arts"))  category = "Fine Arts";
     if(cursor.getString(7).equals("fmc"))  category = "Films and Media";
-    Event event = new Event(category, cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), getContact(cursor.getString(1)));
+    Contact c = getContact(cursor.getString(7));
+    if (c==null)
+      c = new Contact ("Aayush sultania",category, "Head Events and competitions", "7753920896");
+    Event event = new Event(category, cursor.getString(1), start_time, end_time, day, getVenue(cursor.getString(3)), cursor.getString(2), c);
     cursor.moveToNext();
     cursor.close();
     return event;

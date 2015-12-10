@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import java.util.Objects;
 import java.util.Random;
@@ -50,7 +49,7 @@ public class GcmMessageHandler extends GcmListenerService {
     else if (type.equals("result")){
       event_name = data.getString("eventname");
       message = "Results declared for " + event_name;
-      databaseAccess.updateresult(event_name, message);
+      databaseAccess.updateresult(event_name, data.getString("result"));
       createNotification(title, message, event_name, type);
     }
     else {
