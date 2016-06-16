@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity
 
   //save our header or result
   private Drawer result = null;
+
   private Fragment f;
   private Toolbar mtoolbar;
-  private GCMClientManager pushClientManager;
   String PROJECT_NUMBER = "138444406408";
   public static String EXTRA_ACTION = "action";
   public Snackbar mSnackBar;
@@ -142,8 +142,6 @@ public class MainActivity extends AppCompatActivity
     //react on the keyboard
     result.keyboardSupportEnabled(this, true);
 
-    gcmregister();
-
     Intent intent = getIntent();
     String VenueName = intent.getStringExtra(EXTRA_ACTION);
     if (VenueName != null)
@@ -182,31 +180,7 @@ public class MainActivity extends AppCompatActivity
     Snackbar.make(findViewById(R.id.main_screen), text, length).setAction("Action", null).show();
   }
 
-  public void gcmregister()
-  {
-    pushClientManager = new GCMClientManager(this, PROJECT_NUMBER);
-    pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler()
-    {
 
-      @Override
-      public void onSuccess(String registrationId, boolean isNewRegistration)
-      {
-
-        // SEND async device registration to your back-end server
-        // linking user with device registration id
-        // POST https://my-back-end.com/devices/register?user_id=123&device_id=abc
-      }
-
-      @Override
-      public void onFailure(String ex)
-      {
-        super.onFailure(ex);
-        // If there is an error registering, don't just keep trying to register.
-        // Require the user to click a button again, or perform
-        // exponential back-off when retrying.
-      }
-    });
-  }
 
   public void showSnackBarIndefinite(String s)
   {
