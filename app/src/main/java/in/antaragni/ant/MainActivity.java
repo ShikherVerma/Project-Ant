@@ -24,6 +24,10 @@ import in.antaragni.ant.fragments.EventFragment;
 import in.antaragni.ant.fragments.HomeFragment;
 import in.antaragni.ant.fragments.MapFragment;
 import in.antaragni.ant.fragments.ScheduleFragment;
+import android.util.Log;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 
 public class MainActivity extends AppCompatActivity
 {
@@ -34,9 +38,9 @@ public class MainActivity extends AppCompatActivity
   protected static int CONTACT = 5;
   protected static int ABOUT = 6;
 
-  //save our header or result
+  //save our header or result.
+  private static final String TAG = "MainActivity";
   private Drawer result = null;
-
   private Fragment f;
   private Toolbar mtoolbar;
   String PROJECT_NUMBER = "138444406408";
@@ -48,7 +52,16 @@ public class MainActivity extends AppCompatActivity
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
+    if (getIntent().getExtras() != null) {
+      for (String key : getIntent().getExtras().keySet()) {
+        String value = getIntent().getExtras().getString(key);
+        Log.d(TAG, "Key: " + key + " Value: " + value);
+      }
+    }
+    FirebaseMessaging.getInstance().subscribeToTopic("news");
+    Log.d(TAG, "Subscribed to news topic");
+    FirebaseMessaging.getInstance().subscribeToTopic("news");
+    Log.d(TAG, "Subscribed to news topic");
     // Handle Toolbar
     mtoolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(mtoolbar);
