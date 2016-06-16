@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity
   private Drawer result = null;
   private Fragment f;
   private Toolbar mtoolbar;
-  String PROJECT_NUMBER = "138444406408";
   public static String EXTRA_ACTION = "action";
   public Snackbar mSnackBar;
   public AlertDialog alertDialog;
@@ -59,10 +58,9 @@ public class MainActivity extends AppCompatActivity
       }
     }
     FirebaseMessaging.getInstance().subscribeToTopic("news");
-    Log.d(TAG, "Subscribed to news topic");
-    FirebaseMessaging.getInstance().subscribeToTopic("news");
-    Log.d(TAG, "Subscribed to news topic");
+    FirebaseInstanceId.getInstance().getToken();
     // Handle Toolbar
+
     mtoolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(mtoolbar);
 
