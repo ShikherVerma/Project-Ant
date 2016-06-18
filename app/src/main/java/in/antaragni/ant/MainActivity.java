@@ -24,6 +24,10 @@ import in.antaragni.ant.fragments.EventFragment;
 import in.antaragni.ant.fragments.HomeFragment;
 import in.antaragni.ant.fragments.MapFragment;
 import in.antaragni.ant.fragments.ScheduleFragment;
+import android.util.Log;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 
 public class MainActivity extends AppCompatActivity
 {
@@ -34,12 +38,11 @@ public class MainActivity extends AppCompatActivity
   protected static int CONTACT = 5;
   protected static int ABOUT = 6;
 
-  //save our header or result
+  //save our header or result.
+  private static final String TAG = "MainActivity";
   private Drawer result = null;
   private Fragment f;
   private Toolbar mtoolbar;
-  private GCMClientManager pushClientManager;
-  String PROJECT_NUMBER = "138444406408";
   public static String EXTRA_ACTION = "action";
   public Snackbar mSnackBar;
   public AlertDialog alertDialog;
@@ -48,8 +51,16 @@ public class MainActivity extends AppCompatActivity
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
+    if (getIntent().getExtras() != null) {
+      for (String key : getIntent().getExtras().keySet()) {
+        String value = getIntent().getExtras().getString(key);
+        Log.d(TAG, "Key: " + key + " Value: " + value);
+      }
+    }
+    FirebaseMessaging.getInstance().subscribeToTopic("news");
+    FirebaseInstanceId.getInstance().getToken();
     // Handle Toolbar
+
     mtoolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(mtoolbar);
 
@@ -142,8 +153,6 @@ public class MainActivity extends AppCompatActivity
     //react on the keyboard
     result.keyboardSupportEnabled(this, true);
 
-    gcmregister();
-
     Intent intent = getIntent();
     String VenueName = intent.getStringExtra(EXTRA_ACTION);
     if (VenueName != null)
@@ -182,31 +191,7 @@ public class MainActivity extends AppCompatActivity
     Snackbar.make(findViewById(R.id.main_screen), text, length).setAction("Action", null).show();
   }
 
-  public void gcmregister()
-  {
-    pushClientManager = new GCMClientManager(this, PROJECT_NUMBER);
-    pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler()
-    {
 
-      @Override
-      public void onSuccess(String registrationId, boolean isNewRegistration)
-      {
-
-        // SEND async device registration to your back-end server
-        // linking user with device registration id
-        // POST https://my-back-end.com/devices/register?user_id=123&device_id=abc
-      }
-
-      @Override
-      public void onFailure(String ex)
-      {
-        super.onFailure(ex);
-        // If there is an error registering, don't just keep trying to register.
-        // Require the user to click a button again, or perform
-        // exponential back-off when retrying.
-      }
-    });
-  }
 
   public void showSnackBarIndefinite(String s)
   {
