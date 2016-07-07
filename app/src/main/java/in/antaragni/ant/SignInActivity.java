@@ -155,10 +155,10 @@ public class SignInActivity extends AppCompatActivity implements
 
 
     public void init() {
-        Intent toy = new Intent(SignInActivity.this, MainActivity.class);
-        toy.putExtra("username", username);
-        toy.setData(dp);
-        startActivity(toy);
+        Intent i = new Intent(SignInActivity.this, MainActivity.class);
+        i.putExtra("username", username);
+        i.setData(dp);
+        startActivity(i);
     }
 
     // [START revokeAccess]
