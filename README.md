@@ -18,6 +18,7 @@ Import project by `File > New > Import Project`
 # Contributors
  * Shikher Verma
  * Aditya Gajbhiye
+ * Saransh Bhatnagar
  
 ---
 See NOTICE.txt for license information.
