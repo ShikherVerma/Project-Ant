@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "311414566952",
+    "project_number": "1088537791745",
     "firebase_url": "https://project-1983469215793231962.firebaseio.com",
-    "project_id": "project-1983469215793231962",
+    "project_id": "antaragni-2016-master",
     "storage_bucket": "project-1983469215793231962.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:311414566952:android:ecf683d1a9f494e7",
+        "mobilesdk_app_id": "1:1088537791745:android:ecf683d1a9f494e7",
         "android_client_info": {
           "package_name": "in.antaragni.ant"
         }
       },
       "oauth_client": [
         {
-          "client_id": "311414566952-mb3d1njiodaf5ct1fs7mqr2n7u6vjh2o.apps.googleusercontent.com",
+          "client_id": "1088537791745-998d20jgvmi0ksd1pl88cgvhlkodv1ht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.antaragni.ant",
+            "certificate_hash": "C4AC2758E373F2D820AA529966EFF65C655A52E0"
+          }
+        },
+        {
+          "client_id": "1088537791745-25fufthlhfs803as790qa8fmr3jfm9hn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDDxVrkVeqfaP2BVzzNwxrCoSfCq-3097A"
+          "current_key": "AIzaSyAvuc9WF43f9PV7McRQT6akaObZZSvfvOY"
         }
       ],
       "services": {
@@ -33,7 +41,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }
