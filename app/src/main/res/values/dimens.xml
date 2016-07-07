@@ -26,4 +26,5 @@
   <dimen name="list_left_margin">25sp</dimen>
   <dimen name="list_right_margin">25sp</dimen>
   <dimen name="list_item_font_size">17sp</dimen>
+  <dimen name="g_top_margin">100dp</dimen>
 </resources>

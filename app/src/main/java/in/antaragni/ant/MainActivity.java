@@ -1,7 +1,9 @@
 package in.antaragni.ant;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -9,12 +11,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.Status;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.KeyboardUtil;
 
@@ -25,7 +44,7 @@ import in.antaragni.ant.fragments.HomeFragment;
 import in.antaragni.ant.fragments.MapFragment;
 import in.antaragni.ant.fragments.ScheduleFragment;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener
 {
   protected static int HOME = 1;
   protected static int SCHEDULE = 2;
@@ -33,9 +52,11 @@ public class MainActivity extends AppCompatActivity
   protected static int MAP = 4;
   protected static int CONTACT = 5;
   protected static int ABOUT = 6;
+  protected static int SIGNOUT = 7;
 
   //save our header or result
   private Drawer result = null;
+  private GoogleApiClient CLIENT;
   private Fragment f;
   private Toolbar mtoolbar;
   private GCMClientManager pushClientManager;
@@ -43,20 +64,48 @@ public class MainActivity extends AppCompatActivity
   public static String EXTRA_ACTION = "action";
   public Snackbar mSnackBar;
   public AlertDialog alertDialog;
+  public String username;
+  public Uri image;
+
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+        username = getIntent().getExtras().getString("username");
+        image = getIntent().getData();
+        // Create the AccountHeader
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        new ProfileDrawerItem().withName(username).withIcon(image)
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        return false;
+                    }
+                })
+                .build();
+
+//Now create your drawer and pass the AccountHeader.Result
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        CLIENT = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
     // Handle Toolbar
     mtoolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(mtoolbar);
-
     //Create the drawer
     result = new DrawerBuilder(this)
       //this layout have to contain child layouts
       .withRootView(R.id.drawer_container)
+      .withAccountHeader(headerResult)
       .withToolbar(mtoolbar)
       .withTranslucentStatusBar(false)
       .withActionBarDrawerToggleAnimated(true)
@@ -66,7 +115,8 @@ public class MainActivity extends AppCompatActivity
         new PrimaryDrawerItem().withName(R.string.drawer_item_events).withIcon(FontAwesome.Icon.faw_eye).withIdentifier(EVENTS),
         new PrimaryDrawerItem().withName(R.string.drawer_item_maps).withIcon(FontAwesome.Icon.faw_map_marker).withIdentifier(MAP),
         new PrimaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_users).withIdentifier(CONTACT),
-        new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(FontAwesome.Icon.faw_book).withIdentifier(ABOUT))
+        new PrimaryDrawerItem().withName(R.string.drawer_item_about).withIcon(FontAwesome.Icon.faw_book).withIdentifier(ABOUT),
+        new PrimaryDrawerItem().withName(R.string.drawer_item_signout).withIcon(FontAwesome.Icon.faw_sign_out).withIdentifier(SIGNOUT))
       .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener()
       {
         @Override
@@ -111,6 +161,9 @@ public class MainActivity extends AppCompatActivity
               getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
               f = AboutFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+            } else if (drawerItem.getIdentifier() == SIGNOUT)
+            {
+              init();
             }
           }
           return false;
@@ -149,6 +202,20 @@ public class MainActivity extends AppCompatActivity
     if (VenueName != null)
       startMap(VenueName, true);
   }
+
+    public void init() {
+
+        Auth.GoogleSignInApi.signOut(CLIENT).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        // [START_EXCLUDE]
+                        Intent api = new Intent(MainActivity.this, SignInActivity.class);
+                        startActivity(api);
+                        // [END_EXCLUDE]
+                    }
+                });
+    }
 
   public void startMap(String v, boolean backarrow)
   {
@@ -259,5 +326,8 @@ public class MainActivity extends AppCompatActivity
   public void dismissloading()
   {
     alertDialog.dismiss();
+  }
+  public void onConnectionFailed(@NonNull ConnectionResult connectionResult)
+  {
   }
 }

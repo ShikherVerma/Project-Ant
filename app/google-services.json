@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1088537791745",
+    "project_id": "antaragni-2016-master"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088537791745:android:ecf683d1a9f494e7",
+        "android_client_info": {
+          "package_name": "in.antaragni.ant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088537791745-998d20jgvmi0ksd1pl88cgvhlkodv1ht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.antaragni.ant",
+            "certificate_hash": "C4AC2758E373F2D820AA529966EFF65C655A52E0"
+          }
+        },
+        {
+          "client_id": "1088537791745-25fufthlhfs803as790qa8fmr3jfm9hn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvuc9WF43f9PV7McRQT6akaObZZSvfvOY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
