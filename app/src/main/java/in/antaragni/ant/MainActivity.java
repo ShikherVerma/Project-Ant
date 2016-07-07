@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        // Handle Toolbar
+    // Handle Toolbar
     mtoolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(mtoolbar);
     //Create the drawer
