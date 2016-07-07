@@ -23,7 +23,6 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-
 /**
  * Activity to demonstrate basic retrieval of the Google user's ID, email address, and basic
  * profile.
@@ -68,10 +67,8 @@ public class SignInActivity extends AppCompatActivity implements
 
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
-
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-
 
         // [START customize_button]
         // Customize sign-in button. The sign-in button can be displayed in
@@ -137,7 +134,6 @@ public class SignInActivity extends AppCompatActivity implements
             dp = acct.getPhotoUrl();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
-
         } else {
             // Signed out, show unauthenticated UI.
             updateUI(false);

@@ -1,30 +1,30 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!-- dimension for cards-->
-    <dimen name="default_margin_padding">14dp</dimen>
-    <dimen name="inter_card_half_spacing">4dp</dimen>
-    <dimen name="card_padding">2dp</dimen>
-    <dimen name="quiz_question_text_size">24sp</dimen>
-    <dimen name="list_item_avatar_size">50dp</dimen>
+  <!-- dimension for cards-->
+  <dimen name="default_margin_padding">14dp</dimen>
+  <dimen name="inter_card_half_spacing">4dp</dimen>
+  <dimen name="card_padding">2dp</dimen>
+  <dimen name="quiz_question_text_size">24sp</dimen>
+  <dimen name="list_item_avatar_size">50dp</dimen>
 
-    <!--card lib default height of card -->
-    <dimen name="card_base_empty_height">40dp</dimen>
+  <!--card lib default height of card -->
+  <dimen name="card_base_empty_height">40dp</dimen>
 
-    <!--used in competition layout for material cards -->
-    <dimen name="carddemo_keyline_1_minus_8dp">8dp</dimen>
+  <!--used in competition layout for material cards -->
+  <dimen name="carddemo_keyline_1_minus_8dp">8dp</dimen>
 
-    <!--used in event details activity-->
-    <dimen name="detail_backdrop_height">256dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+  <!--used in event details activity-->
+  <dimen name="detail_backdrop_height">256dp</dimen>
+  <dimen name="fab_margin">16dp</dimen>
 
-    <!-- dimensions for event details screen -->
-    <dimen name="list_top_margin">15sp</dimen>
-    <dimen name="list_bottom_margin">15sp</dimen>
-    <dimen name="list_left_margin">25sp</dimen>
-    <dimen name="list_right_margin">25sp</dimen>
-    <dimen name="list_item_font_size">17sp</dimen>
-    <dimen name="g_top_margin">100dp</dimen>
+  <!-- dimensions for event details screen -->
+  <dimen name="list_top_margin">15sp</dimen>
+  <dimen name="list_bottom_margin">15sp</dimen>
+  <dimen name="list_left_margin">25sp</dimen>
+  <dimen name="list_right_margin">25sp</dimen>
+  <dimen name="list_item_font_size">17sp</dimen>
+  <dimen name="g_top_margin">100dp</dimen>
 </resources>
